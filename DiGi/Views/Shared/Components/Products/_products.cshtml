@@ -1,0 +1,55 @@
+﻿@using Be
+
+<div class="card-body" id="crd">
+
+
+    @{
+        BlL.productsBll bl = new BlL.productsBll();
+
+        var prod = bl.Read();
+        foreach (Products.Product i in prod)
+        {
+
+        
+        <div class="card" style=" height: auto; width: 27%;">
+
+                <form>
+                    <input type="text" name="id" class="mid" value="@i.Id" hidden>
+                    <input type="text" name="nameProduct" class="mnameProduct" value="@i.nameProduct" hidden>
+                    <input type="text" name="price" class="mprice" value="@i.price" hidden>
+                    <input type="text" name="description" class="mdescription" value="@i.description" hidden>
+                    <input type="text" name="camra" class="mcamra" value="@i.camra" hidden>
+                    <input type="text" name="dimensions" class="mdimensions" value="@i.dimensions" hidden>
+                    <input type="text" name="weight" class="mweight" value="@i.weight" hidden>
+                    <input type="text" name="screen" class="mscreen" value="@i.screen" hidden>
+                    <input type="text" name="screenSize" class="mscreenSize" value="@i.screenSize" hidden>
+                    <input type="text" name="bodyStructure" class="mbodyStructure" value="@i.bodyStructure" hidden>
+                    <input type="text" name="specialFeatures" class="mspecialFeatures" value="@i.specialFeatures" hidden>
+                    <input type="text" name="introductionTime" class="mintroductionTime" value="@i.introductionTime" hidden>
+                    <input type="text" name="productModel" class="mproductModel" value="@i.productModel" hidden>
+                    <input type="text" name="memoryCard" class="mmemoryCard" value="@i.memoryCard" hidden>
+                    <input type="text" name="numberProducts" class="mnumberProducts" value="@i.numberProducts" hidden>
+                    <input type="text" name="batterySpecifications" class="mbatterySpecifications" value="@i.batterySpecifications" hidden>
+                    <input type="text" name="operatingSystem" class="moperatingSystem" value="@i.operatingSystem" hidden>
+                    <input type="text" name="category" class="mcategory" value="@i.category" hidden>
+                    <input type="text" name="titlecategory" class="mtitlecategory" value="@i.titleCategory" hidden>
+
+
+                    <a class="btnmoadl" style="margin-right: 89%; cursor: pointer" data-toggle="modal" data-target="#myModal" id="searchsub"><i class="material-icons">&#xe241;</i></a>
+
+                </form>
+
+
+            <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
+            <h3>
+                @i.nameProduct
+            </h3>
+            <h5 class="price">@i.price</h5>
+            <p>@i.specialFeatures</p>
+            <p><button style=" background-color: black; border-radius: 10px;">افزودن به سبد خرید</button></p>
+        </div>
+        }
+    }
+
+
+</div>

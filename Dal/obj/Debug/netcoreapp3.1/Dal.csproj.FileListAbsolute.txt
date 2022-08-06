@@ -1,0 +1,15 @@
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Dal.deps.json
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Dal.runtimeconfig.json
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Dal.runtimeconfig.dev.json
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Dal.dll
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Dal.pdb
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Be.dll
+C:\Users\Key1\source\repos\DiGi\Dal\bin\Debug\netcoreapp3.1\Be.pdb
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.csproj.AssemblyReference.cache
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.AssemblyInfoInputs.cache
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.AssemblyInfo.cs
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.csproj.CoreCompileInputs.cache
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.csproj.CopyComplete
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.dll
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.pdb
+C:\Users\Key1\source\repos\DiGi\Dal\obj\Debug\netcoreapp3.1\Dal.genruntimeconfig.cache

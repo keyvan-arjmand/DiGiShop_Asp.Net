@@ -1,0 +1,521 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_layoutAdminPanel.cshtml";
+}
+@using Be;
+@model Products.Product
+
+
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <!-- Custom Tabs -->
+        <div class="card">
+
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane" id="tab_1">
+
+
+                        <div class="content-wrapper" style="min-height: 520.333px;">
+                            <!-- Content Header (Page header) -->
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+
+                                            <div class="card-header d-flex p-0">
+
+                                                <ul class="nav nav-pills ml-auto p-2">
+                                                    <li class="nav-item active">
+                                                        <a class="nav-link" href="#tab_1" data-toggle="tab">اضافه کردن محصول جدید</a>
+                                                    </li>
+
+                                                    <li class="nav-item">
+                                                        <a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست محصولات</a>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+
+                                        </div><!-- /.col -->
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-left">
+                                                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                                                <li class="breadcrumb-item active">صفحه سریع</li>
+                                            </ol>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.container-fluid -->
+                            </div>
+                            <!-- /.content-header -->
+                            <!-- Main content -->
+                            <div class="content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <div class="card card-primary card-outline">
+
+                                                <form role="form" asp-action="Create" asp-controller="Products" method="post" enctype="multipart/form-data">
+                                                    <h6 class="card-title mb-2 text-bold" style=" padding-bottom: 20px; ">ثـبت محصول جدید</h6>
+
+                                                    <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center;">
+
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">نام محصول </label>
+                                                            <input asp-for="nameProduct" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام محصول را وارد کنید">
+                                                        </div>
+
+                                                        <div class="form-group" style="">
+                                                            <label for="exampleInputEmail1">قیمت محصول</label>
+                                                            <input asp-for="price" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="قیمت محصول را وارد کنید">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">توضیحات محصول</label>
+                                                            <input asp-for="description" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="توضیحات محصول">
+                                                        </div>
+
+                                                        <div class="form-group" style=" ">
+                                                            <label for="exampleInputEmail1">دوربین</label>
+                                                            <input asp-for="camra" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                        </div>
+
+
+
+                                                        <div class="form-group" style=" width: 300px;">
+                                                            <label for="exampleInputFile">پروفایل محصول</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input asp-for="pics" type="file" class="custom-file-input" id="exampleInputFile" style="width: 300px">
+                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="">Upload</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">ابعاد محصول</label>
+                                                            <input asp-for="dimensions" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="1=کاربر عادی//0=ادمین//">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">وزن محصول </label>
+                                                            <input asp-for="weight" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">نوع فناوری صفحه نمایش</label>
+                                                            <input asp-for="screen" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">اندازه صفحه نمایش </label>
+                                                            <input asp-for="screenSize" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">نوع بدنه ی محصول </label>
+                                                            <input asp-for="bodyStructure" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">ویژگی های خاص محصول</label>
+                                                            <input asp-for="specialFeatures" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">زمان عرضه محصول</label>
+                                                            <input asp-for="introductionTime" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">مدل محصول</label>
+                                                            <input asp-for="productModel" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">کارت حافظه</label>
+                                                            <input asp-for="memoryCard" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">تعداد موجودی محصول</label>
+                                                            <input asp-for="numberProducts" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">توضیحات باطری</label>
+                                                            <input asp-for="batterySpecifications" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group" style=" margin-right: 15%;">
+                                                            <label for="exampleInputEmail1">سیستم عامل</label>
+                                                            <input asp-for="operatingSystem" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <!-- /.card-body -->
+                                                 
+                                                    <div class="" style="background-color:none !important; ">
+                                                        <button type="submit" class="btn btn-primary" style=" width: 239px;">ارسال</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.col-md-6 -->
+                                    </div>
+                                    <!-- /.row -->
+                                </div><!-- /.container-fluid -->
+                            </div>
+                            <!-- /.content -->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane active show" id="tab_2">
+                        <div class="content-wrapper">
+
+                            <section class="content">
+
+                                <div class="card-header">
+                                    <div class="card-header d-flex p-0">
+
+
+                                        <ul class="nav nav-pills ml-auto p-2">
+                                            <li class="nav-item active">
+                                                <a class="nav-link" href="#tab_1" data-toggle="tab">اضافه کردن محصول جدید</a>
+                                            </li>
+
+                                            <li class="nav-item">
+                                                <a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست محصولات</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div><!-- /.col -->
+                                <div class="col-sm-6">
+                                    <form class="form-inline ml-3" asp-action="Search" asp-controller="Products" method="post">
+                                        <div class="input-group input-group-sm">
+                                            <input class="form-control form-control-navbar" name="h" type="search" placeholder="جستجو" aria-label="Search">
+                                            <div class="input-group-append" style=" background-color: darkgrey;">
+                                                <button class="btn btn-navbar" type="submit">
+                                                    <i class="fa fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div><!-- /.col -->
+                                <!-- /.card-header -->
+                                <div class="card">
+
+                                    @if (ViewBag.Products != null)
+                                    {
+
+                                        <div class="card-body" id="crd">
+                                            @foreach (Products.Product i in ViewBag.Products)
+                                            {
+
+                                                <div class="card" style=" height: auto; width: 27%;">
+
+                                                    <form>
+                                                        <input type="text" name="id" class="mid" value="@i.Id" hidden>
+                                                        <input type="text" name="nameProduct" class="mnameProduct" value="@i.nameProduct" hidden>
+                                                        <input type="text" name="price" class="mprice" value="@i.price" hidden>
+                                                        <input type="text" name="description" class="mdescription" value="@i.description" hidden>
+                                                        <input type="text" name="camra" class="mcamra" value="@i.camra" hidden>
+                                                        <input type="text" name="dimensions" class="mdimensions" value="@i.dimensions" hidden>
+                                                        <input type="text" name="weight" class="mweight" value="@i.weight" hidden>
+                                                        <input type="text" name="screen" class="mscreen" value="@i.screen" hidden>
+                                                        <input type="text" name="screenSize" class="mscreenSize" value="@i.screenSize" hidden>
+                                                        <input type="text" name="bodyStructure" class="mbodyStructure" value="@i.bodyStructure" hidden>
+                                                        <input type="text" name="specialFeatures" class="mspecialFeatures" value="@i.specialFeatures" hidden>
+                                                        <input type="text" name="introductionTime" class="mintroductionTime" value="@i.introductionTime" hidden>
+                                                        <input type="text" name="productModel" class="mproductModel" value="@i.productModel" hidden>
+                                                        <input type="text" name="memoryCard" class="mmemoryCard" value="@i.memoryCard" hidden>
+                                                        <input type="text" name="numberProducts" class="mnumberProducts" value="@i.numberProducts" hidden>
+                                                        <input type="text" name="batterySpecifications" class="mbatterySpecifications" value="@i.batterySpecifications" hidden>
+                                                        <input type="text" name="operatingSystem" class="moperatingSystem" value="@i.operatingSystem" hidden>
+                                                        <input type="text" name="operatingSystem" class="moperatingSystem" value="@i.operatingSystem" hidden>
+                                                        <input type="text" name="category" class="mcategory" value="@i.category" hidden>
+                                                        <input type="text" name="titlecategory" class="mtitlecategory" value="@i.titleCategory" hidden>
+
+
+                                                        <a class="btnmoadl" style="margin-right: 89%; cursor: pointer" data-toggle="modal" data-target="#myModal" id="searchsub"><i class="material-icons">&#xe241;</i></a>
+
+                                                    </form>
+
+
+
+
+
+                                                    <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
+                                                    <h3>
+                                                        @i.nameProduct
+                                                    </h3>
+                                                    <h5 class="price">@i.price</h5>
+                                                    <p>@i.specialFeatures</p>
+                                                    <p><button style=" background-color: black; border-radius: 10px;">افزودن به سبد خرید</button></p>
+                                                </div>
+
+
+                                            }
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        @await Component.InvokeAsync("Products");
+                                    }
+                                    <!-- /.card-body -->
+                                </div>
+
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="myModal" role="dialog">
+                                    <div class="modal-dialog">
+
+                                        <!-- Modal content-->
+                                        <div class="modal-content" style=" margin-top: 16%; margin-right: -20%; width: 154%;">
+
+
+                                            <div class="modal-content">
+
+                                                <div class="content">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+
+                                                                <form role="form" asp-action="Edit" asp-controller="Products" method="post" enctype="multipart/form-data">
+                                                                    <h6 class="card-title mb-2 text-bold" style=" padding-bottom: 20px; ">ثـبت محصول جدید</h6>
+
+                                                                    <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center;">
+
+
+                                                                        <input type="text" asp-for="Id" class="id" id="pid" hidden>
+
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">نام محصول </label>
+                                                                            <input asp-for="nameProduct" type="text" style="width: 300px" class="form-control nameProduct" id="exampleInputEmail1" placeholder="نام محصول را وارد کنید">
+                                                                        </div>
+
+                                                                        <div class="form-group" style="">
+                                                                            <label for="exampleInputEmail1">قیمت محصول</label>
+                                                                            <input asp-for="price" type="text" class="form-control price" style="width: 300px" id="exampleInputEmail1" placeholder="قیمت محصول را وارد کنید">
+                                                                        </div>
+
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">توضیحات محصول</label>
+                                                                            <input asp-for="description" type="text" class="form-control description" style="width: 300px" id="exampleInputEmail1" placeholder="توضیحات محصول">
+                                                                        </div>
+
+                                                                        <div class="form-group" style=" ">
+                                                                            <label for="exampleInputEmail1">دوربین</label>
+                                                                            <input asp-for="camra" type="text" class="form-control camra" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                                        </div>
+
+
+
+                                                                        <div class="form-group" style=" width: 300px;">
+                                                                            <label for="exampleInputFile">پروفایل محصول</label>
+                                                                            <div class="input-group">
+                                                                                <div class="custom-file">
+                                                                                    <input asp-for="pics" type="file" class="custom-file-input" id="exampleInputFile" style="width: 300px">
+                                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                                </div>
+                                                                                <div class="input-group-append">
+                                                                                    <span class="input-group-text" id="">Upload</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">ابعاد محصول</label>
+                                                                            <input asp-for="dimensions" type="text" style="width: 300px" class="form-control dimensions" id="exampleInputEmail1" placeholder="1=کاربر عادی//0=ادمین//">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">وزن محصول </label>
+                                                                            <input asp-for="weight" type="text" style="width: 300px" class="form-control weight" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">نوع فناوری صفحه نمایش</label>
+                                                                            <input asp-for="screen" type="text" style="width: 300px" class="form-control screen" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">اندازه صفحه نمایش </label>
+                                                                            <input asp-for="screenSize" type="text" style="width: 300px" class="form-control screenSize" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">نوع بدنه ی محصول </label>
+                                                                            <input asp-for="bodyStructure" type="text" style="width: 300px" class="form-control bodyStructure" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">ویژگی های خاص محصول</label>
+                                                                            <input asp-for="specialFeatures" type="text" style="width: 300px" class="form-control specialFeatures" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">زمان عرضه محصول</label>
+                                                                            <input asp-for="introductionTime" type="text" style="width: 300px" class="form-control introductionTime" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">مدل محصول</label>
+                                                                            <input asp-for="productModel" type="text" style="width: 300px" class="form-control productModel" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">کارت حافظه</label>
+                                                                            <input asp-for="memoryCard" type="text" style="width: 300px" class="form-control memoryCard" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">تعداد موجودی محصول</label>
+                                                                            <input asp-for="numberProducts" type="text" style="width: 300px" class="form-control numberProducts" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <label for="exampleInputEmail1">توضیحات باطری</label>
+                                                                            <input asp-for="batterySpecifications" type="text" style="width: 300px" class="form-control batterySpecifications" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+                                                                        <div class="form-group" style="">
+                                                                            <label for="exampleInputEmail1">سیستم عامل</label>
+                                                                            <input asp-for="operatingSystem" type="text" style="width: 300px" class="form-control operatingSystem" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                                        </div>
+
+                                                                        <div class="form-group" style=" ">
+                                                                            <label for="exampleInputEmail1">دسته بندی</label>
+                                                                            <input asp-for="category" type="text" class="form-control category" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                                        </div>
+
+                                                                        <div class="form-group" style=" ">
+                                                                            <label for="exampleInputEmail1">عنوان دسته بندی</label>
+                                                                            <input asp-for="titleCategory" type="text" class="form-control titleCategory" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                                        </div>
+
+                                                                    </div>
+                                                               
+                                                                       
+                                                                    
+                                                                    <button style=" width: 30%; background-color: springgreen; margin-right: 36%;" type="submit" class="btn btn-block btn-outline-success">ذخیره</button>
+                                                                   
+                                                                </form>
+
+                                                                <form asp-action="Delete"asp-controller="Products" method="post">
+                                                                    <input type="text" asp-for="Id" class="id" id="pid" hidden>
+                                                                    <button style=" width: 30%; background-color: red; margin-right: 36%;" type="submit" class="btn btn-block btn-outline-danger">Delete</button>
+                                                                </form>
+
+                                                            </div>
+
+                                                        </div>
+
+
+
+
+
+                                                       
+                                                    </div>
+
+                                                </div>
+                                                <button style=" width: 44%; margin-right: 27%; background-color: black;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_3">
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div><!-- /.card-body -->
+    </div>
+    <!-- ./card -->
+</div>
+<!-- /.col -->
+
+
+@section script{
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            $(".btnmoadl").click(function () {
+
+                var currentrow = $(this).closest("form");
+
+                $(".id").val(currentrow.find($("input.mid[type=text]")).val());
+                $(".nameProduct").val(currentrow.find($("input.mnameProduct[type=text]")).val());
+                $(".price").val(currentrow.find($("input.mprice[type=text]")).val());
+                $(".description").val(currentrow.find($("input.mdescription[type=text]")).val());
+                $(".camra").val(currentrow.find($("input.mcamra[type=text]")).val());
+                $(".dimensions").val(currentrow.find($("input.mdimensions[type=text]")).val());
+                $(".weight").val(currentrow.find($("input.mweight[type=text]")).val());
+                $(".screen").val(currentrow.find($("input.mscreen[type=text]")).val());
+                $(".screenSize").val(currentrow.find($("input.mscreenSize[type=text]")).val());
+                $(".bodyStructure").val(currentrow.find($("input.mbodyStructure[type=text]")).val());
+                $(".specialFeatures").val(currentrow.find($("input.mspecialFeatures[type=text]")).val());
+                $(".introductionTime").val(currentrow.find($("input.mintroductionTime[type=text]")).val());
+                $(".productModel").val(currentrow.find($("input.mproductModel[type=text]")).val());
+                $(".memoryCard").val(currentrow.find($("input.mmemoryCard[type=text]")).val());
+                $(".numberProducts").val(currentrow.find($("input.mnumberProducts[type=text]")).val());
+                $(".batterySpecifications").val(currentrow.find($("input.mbatterySpecifications[type=text]")).val());
+                $(".operatingSystem").val(currentrow.find($("input.moperatingSystem[type=text]")).val());
+                $(".category").val(currentrow.find($("input.mcategory[type=text]")).val());
+                $(".titleCategory").val(currentrow.find($("input.mtitleCategory[type=text]")).val());
+           
+            });
+
+        });
+    </script>
+
+
+
+}
+
+<style>
+    #crd {
+        display: flex;
+        width: 100%;
+        height: auto;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        max-width: 300px;
+        margin: auto;
+        text-align: center;
+        font-family: arial;
+    }
+
+    .price {
+        color: grey;
+        font-size: 22px;
+    }
+
+    .card button {
+        border: none;
+        outline: 0;
+        padding: 12px;
+        color: white;
+        background-color: #000;
+        text-align: center;
+        cursor: pointer;
+        width: 100%;
+        font-size: 18px;
+    }
+
+        .card button:hover {
+            opacity: 0.7;
+        }
+</style>

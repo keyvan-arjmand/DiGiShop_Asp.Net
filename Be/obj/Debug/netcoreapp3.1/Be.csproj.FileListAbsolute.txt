@@ -1,0 +1,9 @@
+C:\Users\Key1\source\repos\DiGi\Be\bin\Debug\netcoreapp3.1\Be.deps.json
+C:\Users\Key1\source\repos\DiGi\Be\bin\Debug\netcoreapp3.1\Be.dll
+C:\Users\Key1\source\repos\DiGi\Be\bin\Debug\netcoreapp3.1\Be.pdb
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.csproj.AssemblyReference.cache
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.AssemblyInfoInputs.cache
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.AssemblyInfo.cs
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.csproj.CoreCompileInputs.cache
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.dll
+C:\Users\Key1\source\repos\DiGi\Be\obj\Debug\netcoreapp3.1\Be.pdb

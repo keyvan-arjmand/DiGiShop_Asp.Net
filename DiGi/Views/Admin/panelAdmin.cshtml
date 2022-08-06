@@ -1,0 +1,271 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_layoutAdminPanel.cshtml";
+}
+
+@model UserModel
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-12">
+        <!-- Custom Tabs -->
+        <div class="card">
+        
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane" id="tab_1">
+
+
+                        <div class="content-wrapper" style="min-height: 520.333px;">
+                            <!-- Content Header (Page header) -->
+                            <div class="content-header">
+                                <div class="container-fluid">
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                           
+                                                <div class="card-header d-flex p-0">
+                                               
+                                                    <ul class="nav nav-pills ml-auto p-2">
+                                                        <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">ثـبت کاربران</a></li>
+                                                        <li class="nav-item"><a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست کاربران</a></li>
+                                                 
+                                                    </ul>
+                                                </div>
+                                            
+                                        </div><!-- /.col -->
+                                        <div class="col-sm-6">
+                                            <ol class="breadcrumb float-sm-left">
+                                                <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                                                <li class="breadcrumb-item active">صفحه سریع</li>
+                                            </ol>
+                                        </div><!-- /.col -->
+                                    </div><!-- /.row -->
+                                </div><!-- /.container-fluid -->
+                            </div>
+                            <!-- /.content-header -->
+                            <!-- Main content -->
+                            <div class="content">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card card-primary card-outline">
+                                               
+                                                <form role="form" asp-action="signUp" asp-controller="Account" method="post" enctype="multipart/form-data">
+                                                    <h6 class="card-title mb-2 text-bold" style=" padding-bottom: 20px; ">ثـبت نام کاربر</h6>
+
+                                                    <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center;">
+
+
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">نام</label>
+                                                            <input asp-for="FirstName" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                        </div>
+
+                                                        <div class="form-group" style="">
+                                                            <label for="exampleInputEmail1">فامیل</label>
+                                                            <input asp-for="LastName" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="فامیل را وارد کنید">
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">نام کاربری</label>
+                                                            <input asp-for="Username" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="نام کاربری را وارد کنید">
+                                                        </div>
+
+                                                        <div class="form-group" style=" ">
+                                                            <label for="exampleInputEmail1">شماره موبایل</label>
+                                                            <input asp-for="phoneNumber" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                        </div>
+
+                                                        <div class="input-group " style="width: 300px;margin-top:1%">
+
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+
+                                                            </div>
+                                                            <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل را وارد کنید">
+                                                        </div>
+
+
+                                                        <div class="form-group" style=" margin-top: 2.5%;">
+
+                                                            <input asp-for="Password" type="password" class="form-control" style="width: 300px" id="exampleInputPassword1" placeholder="پسورد را وارد کنید">
+                                                        </div>
+                                                        <div class="form-group" style=" width: 300px;">
+                                                            <label for="exampleInputFile">پروفایل</label>
+                                                            <div class="input-group">
+                                                                <div class="custom-file">
+                                                                    <input asp-for="pic" type="file" class="custom-file-input" id="exampleInputFile" style="width: 300px">
+                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                </div>
+                                                                <div class="input-group-append">
+                                                                    <span class="input-group-text" id="">Upload</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group" style="margin-left: -11%;">
+                                                            <label for="exampleInputEmail1">وضعیت ادمین</label>
+                                                            <input asp-for="admin" type="number" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="1=کاربر عادی//0=ادمین//">
+                                                        </div>
+
+                                                    </div>
+
+                                                    <!-- /.card-body -->
+                                                    <div class="form-check">
+                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" style="width: 300px">
+                                                        <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
+                                                    </div>
+                                                    <div class="" style="margin-right: 35%;background-color:none !important; ">
+                                                        <button type="submit" class="btn btn-primary" style=" width: 239px;">ارسال</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+
+
+                                        </div>
+                                        <!-- /.col-md-6 -->
+                                    </div>
+                                    <!-- /.row -->
+                                </div><!-- /.container-fluid -->
+                            </div>
+                            <!-- /.content -->
+                        </div>
+
+
+
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane active show" id="tab_2">
+                        <div class="content-wrapper">
+
+                            <section class="content">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-header d-flex p-0">
+
+                                            <ul class="nav nav-pills ml-auto p-2">
+                                                <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">ثـبت کاربران</a></li>
+                                                <li class="nav-item"><a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست کاربران</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div id="example1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
+                                            <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="example1_length"><label>Show <select name="example1_length" aria-controls="example1" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="example1_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="example1"></label></div></div></div><div class="row">
+                                                <div class="col-sm-12">
+                                                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid">
+                                                        <thead>
+                                                            <tr role="row">
+                                                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="موتور رندر: activate to sort column descending" style="width: 132.698px;">نام</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="مرورگر: activate to sort column ascending" style="width: 250.917px;">فامیل</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="سیستم عامل: activate to sort column ascending" style="width: 227.167px;">ایمیل</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="ورژن: activate to sort column ascending" style="width: 52.0833px;">نام کاربری</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">رمز عبور</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">تلفن همراه</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">وضعیت ادمین</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">پروفایل</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @{
+
+                                                                int num = 0;
+
+                                                                foreach (var item in ViewBag.users)
+                                                                {
+                                                                    num = num + 1; // is the first item considered even or odd?  that answer changes where this should go
+
+
+
+                                                                    if (num % 2 == 0)
+                                                                    {
+                                                                        <tr role="row" class="even">
+                                                                            <td class="sorting_1">@item.name</td>
+                                                                            <td>@item.family</td>
+                                                                            <td>@item.email</td>
+                                                                            <td>@item.username</td>
+                                                                            <td>@item.password</td>
+                                                                            <td>@item.phoneNumber</td>
+                                                                            <td>@item.admin</td>
+                                                                            <td><img src="~/image/users/@item.pic" /></td>
+
+                                                                        </tr>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                    <td class="sorting_1">@item.name</td>
+                                                                    <td>@item.family</td>
+                                                                    <td>@item.email</td>
+                                                                    <td>@item.username</td>
+                                                                    <td>@item.password</td>
+                                                                    <td>@item.phoneNumber</td>
+                                                                    <td>@item.admin</td>
+                                                                    <td><img src="~/image/users/@item.pic" /></td>
+                                                                }
+
+                                                            }
+
+                                                            }
+
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+                                                </div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">قبلی</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">بعدی</a></li></ul></div></div></div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                    </div>
+                                </section>
+                                <div>
+
+                                    <a aria-controls="multi-select" data-dt-idx="0" tabindex="-1" id="multi-select_previous">قبلی</a><span>
+                                        @{
+                                            BlL.usersBll blh = new BlL.usersBll();
+                                            int f = blh.gettotal();
+                                            int count;
+                                            if (f % 10 == 0) count = f % 10;
+                                            else count = (f / 10) + 1;
+                                            for (var i = 0; i < count; i++)
+                                            {
+                                                <a aria-controls="multi-select" data-dt-idx=@i tabindex="0" href=@Url.Action("getskip","Account",new {c=i })>@i</a>
+                                            }
+
+                                        }
+                                    </span><a aria-controls="multi-select" data-dt-idx="7" tabindex="0" id="multi-select_Next">بعدی</a>
+                                </div>
+
+                            </div>
+                    </div>
+                    <!-- /.tab-pane -->
+                    <div class="tab-pane" id="tab_3">
+                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div><!-- /.card-body -->
+        </div>
+        <!-- ./card -->
+    </div>
+    <!-- /.col -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

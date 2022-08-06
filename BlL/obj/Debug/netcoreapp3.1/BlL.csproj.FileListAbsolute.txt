@@ -1,0 +1,14 @@
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\BlL.deps.json
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\BlL.dll
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\BlL.pdb
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\Be.dll
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\Dal.dll
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\Dal.pdb
+C:\Users\Key1\source\repos\DiGi\BlL\bin\Debug\netcoreapp3.1\Be.pdb
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.csproj.AssemblyReference.cache
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.AssemblyInfoInputs.cache
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.AssemblyInfo.cs
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.csproj.CoreCompileInputs.cache
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.csproj.CopyComplete
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.dll
+C:\Users\Key1\source\repos\DiGi\BlL\obj\Debug\netcoreapp3.1\BlL.pdb

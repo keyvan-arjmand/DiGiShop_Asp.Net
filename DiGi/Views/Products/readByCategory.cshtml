@@ -1,0 +1,98 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Be;
+
+
+<div class="container">
+    <div class="row">
+        <nav class="col-md-2">
+            <div id="mySidenav" class="sidenav" style=" border-radius: 40px;">
+                <div style=" margin-right: 4%;">
+
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="#">Clients</a>
+                    <a href="#">Contact</a>
+                </div>
+
+            </div>
+        </nav>
+        <div class="col-md-10" style=" border-bottom: solid; display: flex; flex-wrap: wrap; justify-content: space-evenly; margin-top: 1%; border-top: solid; padding-top: 26px; border-radius: 40px; padding-bottom: 40px;">
+            @foreach (Products.Product i in ViewBag.Products)
+            {
+
+                <div class="card" style=" height: auto; width: 27%;">
+
+
+                    <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
+                    <h3>
+                        @i.nameProduct
+                    </h3>
+                    <h5 class="price">@i.price</h5>
+                    <p>@i.specialFeatures</p>
+                    <p><button style="  border-radius: 10px;">افزودن به سبد خرید</button></p>
+                </div>
+
+
+            }
+        </div>
+
+    </div>
+
+</div>
+
+
+@section Scripts{
+  
+    <style>
+
+
+
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            z-index: 1;
+            top: 10px;
+            left: auto;
+            background-color: #343a40;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            margin-right: -6.1%;
+            margin-top: 5.5%;
+        }
+
+            .sidenav a {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+                .sidenav a:hover {
+                    color: #f1f1f1;
+                }
+
+            .sidenav .closebtn {
+                position: absolute;
+                top: 0;
+                right: 210px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+
+        });
+
+
+    </script>
+}
+
