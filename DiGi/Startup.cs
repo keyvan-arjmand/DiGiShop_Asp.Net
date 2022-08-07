@@ -33,6 +33,7 @@ namespace DiGi
             {
                 option.IdleTimeout = TimeSpan.FromMinutes(20);
             });
+
             services.AddDbContext<DB>(s => s.UseSqlServer(Configuration.GetConnectionString("CON1")));
             services.AddIdentity<UserApp, IdentityRole>(option =>
             {
@@ -55,7 +56,7 @@ namespace DiGi
                 options.AccessDeniedPath = "/Account/AccessDenied";
                 options.Cookie.Name = "WebAppIdentityCooclie";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-                options.LoginPath = "/Account/Login";
+                options.LoginPath = "/Account/SignUp";
                 options.SlidingExpiration = true;
             });
 
@@ -84,7 +85,7 @@ namespace DiGi
 
             app.UseAuthorization();
             app.UseAuthentication();
-
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

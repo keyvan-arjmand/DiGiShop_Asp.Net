@@ -98,5 +98,10 @@ namespace Dal
             return q.ToList(); ;
 
         }
+        public List<Products.Product> SearchByID(List<int> ids)
+        {
+            var q = from i in db.products where ids.Contains(i.Id) select i;
+            return q.ToList();
+        }
     }
 }

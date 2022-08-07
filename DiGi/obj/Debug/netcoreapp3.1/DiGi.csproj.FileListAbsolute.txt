@@ -385,3 +385,4 @@ C:\Users\Key1\source\repos\DiGi\DiGi\obj\Debug\netcoreapp3.1\Razor\Views\Shared\
 C:\Users\Key1\source\repos\DiGi\DiGi\obj\Debug\netcoreapp3.1\Razor\Views\Products\readByCategory.cshtml.g.cs
 C:\Users\Key1\source\repos\DiGi\DiGi\obj\Debug\netcoreapp3.1\staticwebassets\DiGi.StaticWebAssets.xml
 C:\Users\Key1\source\repos\DiGi\DiGi\obj\Debug\netcoreapp3.1\scopedcss\bundle\DiGi.styles.css
+C:\Users\Key1\source\repos\DiGi\DiGi\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll

@@ -46,7 +46,7 @@
             </h3>
             <h5 class="price">@i.price</h5>
             <p>@i.specialFeatures</p>
-            <p><button style=" background-color: black; border-radius: 10px;">افزودن به سبد خرید</button></p>
+            <p><a asp-action="AddToBasket" asp-controller="Order" asp-route-prodid="@i.Id" style=" background-color: black; border-radius: 10px;">افزودن به سبد خرید</a></p>
         </div>
         }
     }

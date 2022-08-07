@@ -7,6 +7,21 @@
 @inject IHttpContextAccessor httpContextAccessr
 @inject UserManager<Users.UserApp> usermanager
 @using BlL;
+@using Newtonsoft.Json;
+@{
+    var prodid = new List<int>();
+    if (httpContextAccessr.HttpContext.Session.GetString("basket") != null)
+    {
+        prodid = JsonConvert.DeserializeObject<List<int>>(httpContextAccessr.HttpContext.Session.GetString("basket"));
+
+
+    }
+    var blc = new productsBll();
+    var products = blc.SearchByID(prodid);
+
+    var q = from i in products where i.Id == i.Id select i;
+    var b = q.ToList().Count();
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,33 +110,27 @@
                             <div id="cd-cart-trigger" style="background-color: black;">
 
                             </div>
-                            <div id="cd-cart" class="speed-in" style=" margin-top: 5.5%; border-radius: 100px; height: auto;">
+                            <div id="cd-cart" class="speed-in" style=" margin-top: 5.5%; border-radius: 50px; height: auto;">
                                 <h2 style="margin-top: -46px; ">Cart</h2>
                                 <ul class="cd-cart-items">
-                                    <li>
-                                        <span class="cd-qty">1x</span> Product Name
-                                        <div class="cd-price">$9.99</div>
-                                        <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-                                    </li>
 
-                                    <li>
-                                        <span class="cd-qty">2x</span> Product Name
-                                        <div class="cd-price">$19.98</div>
-                                        <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-                                    </li>
 
-                                    <li>
-                                        <span class="cd-qty">1x</span> Product Name
-                                        <div class="cd-price">$9.99</div>
-                                        <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-                                    </li>
+                                    @foreach (var i in products)
+                                    {
+                                        <li>
+                                            <span class="cd-qty">1x</span> @i.nameProduct
+                                            <div class="cd-price">@i.price</div>
+                                            <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
+                                        </li>
+                                    }
+
                                 </ul> <!-- cd-cart-items -->
 
                                 <div class="cd-cart-total">
-                                    <p>Total <span>$39.96</span></p>
+                                    <p>Total <span>$</span></p>
                                 </div> <!-- cd-cart-total -->
 
-                                <a href="#0" class="checkout-btn">Checkout</a>
+                                <a href="#0" class="checkout-btn">فاکتور</a>
 
                                 <p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
                             </div>
@@ -227,7 +236,7 @@
                             </li>
                             <li class="nav-item p-1" id="basket" style="margin-right: 80px; margin-top: 9%; ">
                                 <a class="nav-link" href="#" style="margin-top: -17px; padding: 10px;">
-                                    <i style="font-size:24px;color:#CCCECF;margin-top: 15px;" class="fa">&#xf291;</i><span class="badge badge-danger" style="display: inline-table;position: absolute;margin-right: -48px;margin-top: 16px;">6</span>
+                                    <i style="font-size:24px;color:#CCCECF;margin-top: 15px;" class="fa">&#xf291;</i><span class="badge badge-danger" style="display: inline-table;position: absolute;margin-right: -48px;margin-top: 16px;">@products.Count</span>
                                 </a>
                             </li>
 
@@ -259,7 +268,7 @@
                                                 <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="آرایشی و بهداشتی"})">آرایشی و بهداشتی</a></li>
                                                 <li>
                                                     <a href="@Url.Action("ReadByCategory","Products",new {h ="مد و پوشاک"})">مد و پوشاک</a>
-                                                    <ul class="menuli"  style="margin-right:-17%">
+                                                    <ul class="menuli" style="margin-right:-17%">
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="لباس فصل"})">لباس فصل</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="ساعت  مچی"})">ساعت  مچی</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="بدلیجات"})">بدلیجات</a></li>
@@ -270,7 +279,7 @@
                                                 <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="اسباب بازی"})">اسباب بازی</a></li>
                                                 <li>
                                                     <a href="@Url.Action("ReadByCategory","Products",new {h ="اخبار"})">اخبار</a>
-                                                    <ul class="menuli"  style="margin-right:-19%">
+                                                    <ul class="menuli" style="margin-right:-19%">
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="تکنولوژی"})">تکنولوژی</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="علم و دانش"})">علم و دانش</a></li>
                                                     </ul>
@@ -331,29 +340,29 @@
 
                 var element = document.getElementById("baskets");
                 var status = element.getAttribute("class");
-                
+
 
                 if (status == "hidden1") {
 
                     $("#baskets").prop('hidden', false);
                     $("#baskets").removeClass("hidden1");
-                  
+
 
                 } else if (status == "") {
 
                     $("#baskets").prop('hidden', true);
                     $("#baskets").addClass("hidden1");
-                   
+
                 }
 
-          
+
             });
 
 
 
             $("#cd-cart").hover(function () {
 
-           
+
                 $("#baskets").prop('hidden', false);
             }, function () {
                 $("#baskets").prop('hidden', true);

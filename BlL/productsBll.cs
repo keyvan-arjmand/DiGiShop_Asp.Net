@@ -39,5 +39,9 @@ namespace BlL
         {
             return dl.ReadByCategory(h);
         }
+        public List<Products.Product> SearchByID(List<int> ids)
+        {
+            return dl.SearchByID(ids);
+        }
     }
 }
