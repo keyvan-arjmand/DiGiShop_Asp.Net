@@ -71,25 +71,28 @@
 
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">نام محصول </label>
-                                                            <input asp-for="nameProduct" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام محصول را وارد کنید">
+                                                            <input maxlength="30" asp-for="nameProduct" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام محصول را وارد کنید">
                                                         </div>
 
                                                         <div class="form-group" style="">
                                                             <label for="exampleInputEmail1">قیمت محصول</label>
-                                                            <input asp-for="price" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="قیمت محصول را وارد کنید">
+                                                            <input maxlength="30" asp-for="price" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="قیمت محصول را وارد کنید">
                                                         </div>
 
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">توضیحات محصول</label>
-                                                            <input asp-for="description" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="توضیحات محصول">
+                                                            <input maxlength="100" asp-for="description" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="توضیحات محصول">
                                                         </div>
 
                                                         <div class="form-group" style=" ">
                                                             <label for="exampleInputEmail1">دوربین</label>
-                                                            <input asp-for="camra" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
+                                                            <input maxlength="30" asp-for="camra" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="مشخصات دوربین">
                                                         </div>
 
-
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">رنگ محصول </label>
+                                                            <input maxlength="30" asp-for="Color" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="رنگ محصول را وارد کنید">
+                                                        </div>
 
                                                         <div class="form-group" style=" width: 300px;">
                                                             <label for="exampleInputFile">پروفایل محصول</label>
@@ -105,58 +108,66 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">ابعاد محصول</label>
-                                                            <input asp-for="dimensions" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="1=کاربر عادی//0=ادمین//">
+                                                            <input maxlength="30" asp-for="dimensions" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مشخصات ابعاد">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">وزن محصول </label>
-                                                            <input asp-for="weight" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="30" asp-for="weight" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="وزن محصول را وارد کنید">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">نوع فناوری صفحه نمایش</label>
-                                                            <input asp-for="screen" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="50" asp-for="screen" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مشخصات فناوری صفحه نمایش">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">اندازه صفحه نمایش </label>
-                                                            <input asp-for="screenSize" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="50" asp-for="screenSize" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="اندازه صفحه را وارد کنید">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">نوع بدنه ی محصول </label>
-                                                            <input asp-for="bodyStructure" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="100" asp-for="bodyStructure" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مشخصات بدنه محصول">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">ویژگی های خاص محصول</label>
-                                                            <input asp-for="specialFeatures" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="100" asp-for="specialFeatures" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">زمان عرضه محصول</label>
-                                                            <input asp-for="introductionTime" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="30" asp-for="introductionTime" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">مدل محصول</label>
-                                                            <input asp-for="productModel" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="30" asp-for="productModel" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مدل محصول را وارد کنید">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">کارت حافظه</label>
-                                                            <input asp-for="memoryCard" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="30" asp-for="memoryCard" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مشخصات حافظه محصول">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">تعداد موجودی محصول</label>
-                                                            <input asp-for="numberProducts" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="5" asp-for="numberProducts" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="تعداد موجودی در انبار">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1">توضیحات باطری</label>
-                                                            <input asp-for="batterySpecifications" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="100" asp-for="batterySpecifications" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="مشخصات باطری">
                                                         </div>
                                                         <div class="form-group" style=" margin-right: 15%;">
                                                             <label for="exampleInputEmail1">سیستم عامل</label>
-                                                            <input asp-for="operatingSystem" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
+                                                            <input maxlength="100" asp-for="operatingSystem" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="سیستم عامل محصول">
                                                         </div>
 
+                                                        <div class="form-group" style=" ">
+                                                            <label for="exampleInputEmail1">دسته بندی</label>
+                                                            <input asp-for="category" type="text" class="form-control category" style="width: 300px" id="exampleInputEmail1" placeholder="دسته بندی کالا">
+                                                        </div>
 
+                                                        <div class="form-group" style=" ">
+                                                            <label for="exampleInputEmail1">عنوان دسته بندی</label>
+                                                            <input asp-for="titleCategory" type="text" class="form-control titleCategory" style="width: 300px" id="exampleInputEmail1" placeholder="عنوان دسته بندی کالا">
+                                                        </div>
                                                     </div>
 
                                                     <!-- /.card-body -->
-                                                 
+
                                                     <div class="" style="background-color:none !important; ">
                                                         <button type="submit" class="btn btn-primary" style=" width: 239px;">ارسال</button>
                                                     </div>
@@ -198,10 +209,11 @@
                                         </ul>
                                     </div>
                                 </div><!-- /.col -->
+
                                 <div class="col-sm-6">
                                     <form class="form-inline ml-3" asp-action="Search" asp-controller="Products" method="post">
                                         <div class="input-group input-group-sm">
-                                            <input class="form-control form-control-navbar" name="h" type="search" placeholder="جستجو" aria-label="Search">
+                                            <input maxlength="30" class="form-control form-control-navbar" name="h" type="search" placeholder="جستجو" aria-label="Search">
                                             <div class="input-group-append" style=" background-color: darkgrey;">
                                                 <button class="btn btn-navbar" type="submit">
                                                     <i class="fa fa-search"></i>
@@ -253,6 +265,7 @@
 
 
 
+
                                                     <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
                                                     <h3>
                                                         @i.nameProduct
@@ -269,7 +282,7 @@
                                     }
                                     else
                                     {
-                                        @await Component.InvokeAsync("Products");
+                                        @await Component.InvokeAsync("ProductsAdmin");
                                     }
                                     <!-- /.card-body -->
                                 </div>
@@ -392,16 +405,16 @@
                                                                         </div>
 
                                                                     </div>
-                                                               
-                                                                       
-                                                                    
-                                                                    <button style=" width: 30%; background-color: springgreen; margin-right: 36%;" type="submit" class="btn btn-block btn-outline-success">ذخیره</button>
-                                                                   
+
+
+
+                                                                    <button style=" width: 12em; background-color: #28d52e; margin-right: 17em;" type="submit" class="btn btn-block btn-outline-success">ذخیره</button>
+
                                                                 </form>
 
-                                                                <form asp-action="Delete"asp-controller="Products" method="post">
+                                                                <form asp-action="Delete" asp-controller="Products" method="post">
                                                                     <input type="text" asp-for="Id" class="id" id="pid" hidden>
-                                                                    <button style=" width: 30%; background-color: red; margin-right: 36%;" type="submit" class="btn btn-block btn-outline-danger">Delete</button>
+                                                                    <button style=" width: 12em; background-color: #ff0000a8; margin-right: 17em;" type="submit" class="btn btn-block btn-outline-danger">Delete</button>
                                                                 </form>
 
                                                             </div>
@@ -412,11 +425,11 @@
 
 
 
-                                                       
+
                                                     </div>
 
                                                 </div>
-                                                <button style=" width: 44%; margin-right: 27%; background-color: black;" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button style="width: 20em; margin-right: 13.5em; background-color: #00000040; " type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
 
                                         </div>
@@ -472,7 +485,7 @@
                 $(".operatingSystem").val(currentrow.find($("input.moperatingSystem[type=text]")).val());
                 $(".category").val(currentrow.find($("input.mcategory[type=text]")).val());
                 $(".titleCategory").val(currentrow.find($("input.mtitleCategory[type=text]")).val());
-           
+
             });
 
         });

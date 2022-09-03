@@ -29,7 +29,7 @@ namespace DiGi.Controllers
         }
 
         usersBll bl = new usersBll();
-
+        productsBll blp = new productsBll();
 
 
         public async Task<IActionResult> signUp()
@@ -46,8 +46,7 @@ namespace DiGi.Controllers
         public async Task<IActionResult> login(Models.UserModel h)
         {
             var user = await userManager.FindByNameAsync(h.Username);
-            var daluser = bl.SearchUserName(h.Username);
-
+            Beusers daluser = new Beusers();
 
 
             if (user == null)
@@ -58,6 +57,7 @@ namespace DiGi.Controllers
 
             if (daluser.admin == 1)
             {
+                daluser = bl.SearchUserName(h.Username);
 
                 var signinresult = await signInManager.PasswordSignInAsync(user, h.Password, true, false);
                 if (!signinresult.Succeeded)
@@ -74,6 +74,7 @@ namespace DiGi.Controllers
             else if (daluser.admin == 0)
 
             {
+                daluser = bl.SearchUserName(h.Username);
                 var signinresult = await signInManager.PasswordSignInAsync(user, h.Password, true, false);
                 if (!signinresult.Succeeded)
                 {
@@ -160,6 +161,180 @@ namespace DiGi.Controllers
         {
 
             return View("PG", bl.getskip(c));
+        }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
+        public IActionResult ShowFactor()
+        {
+            return View();
+        }
+        public IActionResult ShowProfile(string username)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+
+                var listuser = bl.SearchUserName(username);
+
+                var user = new Models.UserModel
+                {
+                    admin = listuser.admin,
+                    Email = listuser.email,
+                    FirstName = listuser.name,
+                    LastName = listuser.family,
+                    id = listuser.Id,
+                    Password = listuser.password,
+                    phoneNumber = listuser.phoneNumber,
+                    pic2 = listuser.pic,
+                    Username = listuser.username
+                };
+                var factor = bl.UserFactors(listuser.Id);
+
+                var factorlist = new List<Be.Products.Factor>();
+                var prodfactor = new List<Be.Products.prodFactor>();
+
+                foreach (var i in factor)
+                {
+                    factorlist.Add(new Be.Products.Factor
+                    {
+                        FactorCode = i.FactorCode,
+                        address = i.address,
+                        Id = i.Id,
+                        timePurchase = i.timePurchase,
+                        totalPrice = i.totalPrice,
+                        userid = i.userid
+
+                    });
+
+                    List<Be.Products.prodFactor> pf = blp.ReadByCodeFactorInProdFactor(i.FactorCode);
+
+                    foreach (var q in pf)
+                    {
+                        prodfactor.Add(new Be.Products.prodFactor
+                        {
+                            factorid = q.factorid,
+                            FactorCode = q.FactorCode,
+                            productsid = q.productsid
+                        });
+
+                    }
+
+                }
+
+
+                ViewBag.FactorList = factorlist;
+                ViewBag.ProdFactor = prodfactor;
+
+                return View(user);
+            }
+            return RedirectToAction("Index", "Home");
+
+        }
+
+        public async Task<IActionResult> LogoutAdmin(string h)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                Beusers i = bl.SearchUserName(h);
+                Models.UserModel user = new Models.UserModel
+                {
+                    Username = i.username,
+                    FirstName = i.name,
+                    LastName = i.family,
+                    pic2 = i.pic,
+
+                };
+
+                await signInManager.SignOutAsync();
+
+                return View("LockScreenAdmin", user);
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult LoginAdmin()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> LoginAdmin(Beusers h)
+        {
+
+            var user = await userManager.FindByNameAsync(h.username);
+            var daluser = bl.SearchUserName(h.username);
+
+
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "کاربر با این نام کاربری وجود ندارد");
+                return RedirectToAction("LoginAdmin", "Account");
+            }
+
+            if (daluser.admin == 0)
+            {
+
+                var signinresult = await signInManager.PasswordSignInAsync(user, h.password, true, false);
+
+                if (!signinresult.Succeeded)
+                {
+                    ModelState.AddModelError("", "نام کاربری یا رمز عبور اشتباه است");
+                    return RedirectToAction("LoginAdmin", "Account");
+                }
+
+                return RedirectToAction("Index", "Admin");
+            }
+            return RedirectToAction("Index", "Home");
+
+
+        }
+        [HttpPost]
+        public IActionResult EditUser(Models.UserModel h)
+        {
+            Upload up = new Upload(Environment);
+            var user = new Beusers
+            {
+                Id = h.id,
+                name = h.FirstName,
+                family = h.LastName,
+                email = h.Email,
+                password = h.Password,
+                username = h.Username,
+                pic = up.Uploadfile(h.pic),
+                admin = h.admin,
+                phoneNumber = h.phoneNumber
+            };
+
+            bl.EditUser(user);
+
+            return RedirectToAction("panelAdmin", "Admin");
+
+        }
+        public IActionResult EditAdmin(Models.UserModel h)
+        {
+            Upload up = new Upload(Environment);
+            var user = new Beusers
+            {
+                Id = h.id,
+                name = h.FirstName,
+                family = h.LastName,
+                email = h.Email,
+                password = h.Password,
+                username = h.Username,
+                pic = up.Uploadfile(h.pic),
+                admin = h.admin,
+                phoneNumber = h.phoneNumber
+            };
+
+            bl.EditUser(user);
+
+            return RedirectToAction("ShowAdminProf", "Admin");
+
         }
     }
 }

@@ -1,0 +1,258 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Be;
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessr
+@inject UserManager<Users.UserApp> usermanager
+@using BlL;
+@using Newtonsoft.Json;
+
+@{
+    var prodid = new List<int>();
+    if (httpContextAccessr.HttpContext.Session.GetString("basket") != null)
+    {
+        prodid = JsonConvert.DeserializeObject<List<int>>(httpContextAccessr.HttpContext.Session.GetString("basket"));
+
+
+    }
+
+    var blu = new BlL.usersBll();
+    var blp = new productsBll();
+    var TotalPrice = blp.PriceProdcts(prodid);
+    var products1 = blp.SearchByID(prodid);
+
+    List<ReProdModel> repProd = new List<ReProdModel>();
+
+    var lstrep = blp.ProductsCount(prodid);
+
+    foreach (var i in lstrep)
+    {
+        repProd.Add(new ReProdModel
+        {
+            id = i.Key,
+            count = i.Value
+        });
+    }
+
+
+}
+
+
+
+
+
+
+@section link{
+    <link href="~/bsket/showbasket/StyleSheet.css" rel="stylesheet" />
+}
+
+
+
+<div class="container px-4 py-5 mx-auto" style=" background: white;">
+    <div class="row d-flex justify-content-center">
+        <div class="col-5">
+            <h4 class="heading">سبـد خریـد شما</h4>
+        </div>
+        <div class="col-7">
+            <div class="row text-right">
+                <div class="col-3">
+                    <h6 class="mt-2">رنگ</h6>
+                </div>
+                <div class="col-3">
+                    <h6 class="mt-2">تعداد</h6>
+                </div>
+                <div class="col-3">
+                    <h6 class="mt-2">قیمـت</h6>
+                </div>
+                <div class="col-3">
+                    <h6 class="mt-2">حذف از سبد</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center border-top">
+        @foreach (var i in products1)
+        {
+            bool check = repProd.Any(k => k.id == i.Id);
+
+            if (check == true)
+            {
+                var q = from l in repProd where l.id == i.Id select l;
+                var cuntp = q.Single();
+                var multiplication = i.price * cuntp.count;
+
+                <div class="col-5">
+                    <div class="row d-flex">
+                        <div class="book">
+                            <img src="~/image/users/@i.pics" class="book-img">
+                        </div>
+                        <div class="my-auto flex-column d-flex pad-left">
+                            <h6 class="mob-text">@i.nameProduct</h6>
+                            <p class="mob-text">@i.memoryCard</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-auto col-7">
+                    <div class="row text-right">
+                        <div class="col-3">
+                            <p class="mob-text">@i.Color</p>
+                        </div>
+                        <div class="col-3">
+                            <div class="row d-flex justify-content-end px-3">
+                                <p style="margin-left: -5px;" class="mb-0" id="cnt1">x @cuntp.count</p>
+                                <div class="d-flex flex-column plus-minus" style="margin-right: 160px;">
+                                    <span class="vsm-text plus" style=" margin-left: 187px; margin-top: 4.5px;">+</span>
+                                    <span class="vsm-text minus" style=" margin-top: -9px; margin-left: 172px;">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <h6 class="mob-text">@multiplication.ToString("n0")</h6>
+                        </div>
+                        <div class="col-3">
+                            <a asp-action="RemoveInBasket" asp-controller="Order" asp-route-prodid="@i.Id" class="mob-text"><img style=" width: 3em; height: auto; margin-top: -1em;" src="https://cdn-icons-png.flaticon.com/128/3405/3405244.png" /></a>
+
+                        </div>
+                    </div>
+                </div> }
+            else
+            {
+                <div class="col-5">
+                    <div class="row d-flex">
+                        <div class="book">
+                            <img src="~/image/users/@i.pics" class="book-img">
+                        </div>
+                        <div class="my-auto flex-column d-flex pad-left">
+                            <h6 class="mob-text">@i.nameProduct</h6>
+                            <p class="mob-text">@i.memoryCard</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-auto col-7">
+                    <div class="row text-right">
+                        <div class="col-3">
+                            <p class="mob-text">@i.Color</p>
+                        </div>
+                        <div class="col-3">
+                            <div class="row d-flex justify-content-end px-3">
+                                <p style=" margin-left: 7em; position: absolute;" class="mb-0" id="cnt1">1</p>
+                                <div class="d-flex flex-column plus-minus" style=" margin-left: -5em;">
+                                    <span class="vsm-text plus" style=" margin-left: 187px; margin-top: 4.5px;">+</span>
+                                    <span class="vsm-text minus" style=" margin-top: -9px; margin-left: 172px;">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <h6 class="mob-text">@i.price.ToString("n0")</h6>
+                        </div>
+                        <div class="col-3">
+                            <a asp-action="RemoveInBasket" asp-controller="Order" asp-route-prodid="@i.Id" class="mob-text"><img style=" width: 3em; height: auto; margin-top: -1em;" src="https://cdn-icons-png.flaticon.com/128/3405/3405244.png" /></a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+
+
+        }
+
+    </div>
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="card" style=" width: 60%; margin-right: 20%;">
+                <div class="row">
+
+                    <div class="col-lg-5">
+                        <div class="row px-2">
+                            <div class="form-group col-md-12">
+                                <label class="form-control-label">ادرس</label>
+                                <input type="text" maxlength="50" id="Adress" placeholder="شهر/بلوار/خیابان/پلاک/واحد/کدپستی">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-7 mt-2">
+                        <div class="row d-flex justify-content-between px-4">
+                            <p class="mb-1 text-left">مبلغ خرید</p>
+                            <h6 class="mb-1 text-right">$@TotalPrice.ToString("n0")</h6>
+                        </div>
+                        <div class="row d-flex justify-content-between px-4">
+                            <p class="mb-1 text-left">تخفیف</p>
+                            <h6 class="mb-1 text-right">$0.00</h6>
+                        </div>
+                        <div class="row d-flex justify-content-between px-4" id="tax">
+                            <p class="mb-1 text-left">مجموع قیمت</p>
+                            <h6 class="mb-1 text-right">$@TotalPrice.ToString("n0")</h6>
+                        </div>
+                        <a class="btn-block btn-blue" id="payemant" style=" height: 40px; max-width: 400px;" href="@Url.Action("Payment","Order")">
+                            <span>
+                                <span id="checkout">قابل پرداخت</span>
+                                <span id="check-amt">$@TotalPrice.ToString("n0")</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $(document).ready(function () {
+
+            @*$("#payemant").click(function () {
+
+                alert(typeof (@factor));
+
+                $.ajax({
+                    url: '/Order/PurchaseInvoic',
+                    dataType: 'json',
+                    type: 'post',
+                    contentType: 'application/json',
+                    data: @factor,
+                    processData: false,
+
+                    beforeSend() {
+                        alert("raft");
+                    },
+                    success() {
+                        alert("karet doroste");
+                    }
+                });
+            });*@
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $('.radio-group .radio').click(function () {
+                $('.radio').addClass('gray');
+                $(this).removeClass('gray');
+            });
+
+            $('.plus-minus .plus').click(function () {
+                var count = $(this).parent().prev().text();
+                $(this).parent().prev().html(Number(count) + 1);
+            });
+
+            $('.plus-minus .minus').click(function () {
+                var count = $(this).parent().prev().text();
+                $(this).parent().prev().html(Number(count) - 1);
+            });
+
+        });
+    </script>
+
+
+
+}

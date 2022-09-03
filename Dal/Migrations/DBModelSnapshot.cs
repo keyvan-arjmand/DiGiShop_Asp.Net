@@ -26,21 +26,27 @@ namespace Dal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BeusersId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FactorCode")
+                        .HasColumnType("int");
+
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("timePurchase")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("totalPrice")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("totalPrice")
+                        .HasColumnType("int");
 
-                    b.Property<int?>("userId")
+                    b.Property<int>("userid")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("BeusersId");
 
                     b.ToTable("factors");
                 });
@@ -52,8 +58,8 @@ namespace Dal.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FactorId")
-                        .HasColumnType("int");
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("batterySpecifications")
                         .HasColumnType("nvarchar(max)");
@@ -82,8 +88,8 @@ namespace Dal.Migrations
                     b.Property<string>("nameProduct")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("numberProducts")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("numberProducts")
+                        .HasColumnType("int");
 
                     b.Property<string>("operatingSystem")
                         .HasColumnType("nvarchar(max)");
@@ -91,8 +97,8 @@ namespace Dal.Migrations
                     b.Property<string>("pics")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("price")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("price")
+                        .HasColumnType("int");
 
                     b.Property<string>("productModel")
                         .HasColumnType("nvarchar(max)");
@@ -114,9 +120,30 @@ namespace Dal.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FactorId");
-
                     b.ToTable("products");
+                });
+
+            modelBuilder.Entity("Be.Products+prodFactor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FactorCode")
+                        .HasColumnType("int");
+
+                    b.Property<int>("factorid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productsid")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("factorid");
+
+                    b.ToTable("fctorprod");
                 });
 
             modelBuilder.Entity("Be.Users+Beusers", b =>
@@ -359,16 +386,18 @@ namespace Dal.Migrations
 
             modelBuilder.Entity("Be.Products+Factor", b =>
                 {
-                    b.HasOne("Be.Users+Beusers", "user")
-                        .WithMany()
-                        .HasForeignKey("userId");
+                    b.HasOne("Be.Users+Beusers", null)
+                        .WithMany("factors")
+                        .HasForeignKey("BeusersId");
                 });
 
-            modelBuilder.Entity("Be.Products+Product", b =>
+            modelBuilder.Entity("Be.Products+prodFactor", b =>
                 {
                     b.HasOne("Be.Products+Factor", null)
-                        .WithMany("product")
-                        .HasForeignKey("FactorId");
+                        .WithMany("fprod")
+                        .HasForeignKey("factorid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

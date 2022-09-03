@@ -1,0 +1,76 @@
+﻿@{
+    Layout = "~/Views/Shared/_layoutAdminPanel.cshtml";
+
+    BlL.productsBll blp = new BlL.productsBll();
+    var listFactors = ViewBag.Factors;
+}
+
+
+
+
+
+
+
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <form asp-action="SearchFactor" asp-controller="Admin" method="post">
+                    <div class="card-header">
+                        <h3 class="card-title">فاکتور های ثـبت شده</h3>
+
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="info" class="form-control float-right" placeholder="جستجو">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>شماره</th>
+                                <th>کد فاکتور</th>
+                                <th>تاریخ</th>
+                                <th>قیمت کل</th>
+                                <th>ادرس</th>
+                                <th>وضعیت</th>
+                                <th>مشاهده جزعیات</th>
+                            </tr>
+                            @foreach (Be.Products.Factor i in listFactors)
+                            {
+                                var prod = blp.ReadByCodeFactorInProdFactor(i.FactorCode);
+                        <tr>
+                            <td>@i.Id</td>
+                            <td>@i.FactorCode</td>
+                            <td>@i.timePurchase</td>
+                            <td>@i.totalPrice.ToString("n0")</td>
+                            <td>@i.address</td>
+                            <td><span class="badge badge-success">تایید شده</span></td>
+                            <td>
+                                <a href="@Url.Action("ShowAdminFactor","Admin",new { codefactor = i.FactorCode })" class="btn btn-app">
+                                    <span class="badge bg-success">@prod.Count()</span>
+                                    <i class="fa fa-barcode"></i> مشاهده
+                                </a>
+                            </td>
+                        </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</div>

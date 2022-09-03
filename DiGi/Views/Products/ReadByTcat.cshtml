@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var h = ViewBag.Tcategory;
+}
+@using Be;
+@model ProductsModel
+
+
+
+
+
+
+@section link {
+
+
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <style>
+        .Aprod:hover > a {
+            background-color: #f79fff;
+            color: black
+        }
+    </style>
+
+
+
+
+}
+
+
+
+<div class="content-wrapper">
+
+    <section class="content">
+
+
+
+        <div class="col-sm-6">
+            <form class="form-inline ml-3" asp-action="Search" asp-controller="Products" method="post">
+                <div class="input-group input-group-sm">
+                    <input maxlength="25" class="form-control form-control-navbar" name="h" type="search" placeholder="جستجو" aria-label="Search">
+                    <div class="input-group-append" style=" background-color: darkgrey;">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.col -->
+        <!-- /.card-header -->
+        <div class="card" style=" width: 128%; ">
+
+
+
+            @await Component.InvokeAsync("TitleCategory", h);
+
+            <!-- /.card-body -->
+        </div>
+    </section>
+</div>
+
+
+
+

@@ -9,18 +9,44 @@
 @using BlL;
 @using Newtonsoft.Json;
 @{
+
+    int TotalPrice = new int(); ;
+    List<Products.Product> products = new List<Products.Product>();
+    List<ReProdModel> repProd = new List<ReProdModel>();
+    List<KeyValuePair<int, int>> lstrep = new List<KeyValuePair<int, int>>();
+
+
+
+
+
+    var blu = new usersBll();
+
     var prodid = new List<int>();
+
+    var blc = new productsBll();
     if (httpContextAccessr.HttpContext.Session.GetString("basket") != null)
     {
         prodid = JsonConvert.DeserializeObject<List<int>>(httpContextAccessr.HttpContext.Session.GetString("basket"));
 
-
     }
-    var blc = new productsBll();
-    var products = blc.SearchByID(prodid);
+  
+        TotalPrice = blc.PriceProdcts(prodid);
+        products = blc.SearchByID(prodid);
 
-    var q = from i in products where i.Id == i.Id select i;
-    var b = q.ToList().Count();
+
+        lstrep = blc.ProductsCount(prodid);
+
+        foreach (var i in lstrep)
+        {
+            repProd.Add(new ReProdModel
+            {
+                id = i.Key,
+                count = i.Value
+            });
+        }
+
+  
+
 }
 
 <!DOCTYPE html>
@@ -30,7 +56,11 @@
 
 
 
-    @RenderSection("link", required: false);
+    @RenderSection("link", required: false)
+
+    <link rel="stylesheet" href="~/PanelAdmin/dist/css/adminlte.min.css">
+
+
     <link rel="stylesheet" href="~/bsket/style.css">
     <link rel="stylesheet" href="~/bsket/reset.css">
 
@@ -57,7 +87,52 @@
     <link href="~/vsLayout/css/style.css.map" rel="stylesheet">
     <link href="~/vsLayout/css/style.scss" rel="stylesheet">
 
+    <style>
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
 
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+            .dropdown-content a {
+                color: black !important;
+            }
+
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+
+                .dropdown-content a:hover {
+                    background-color: #ddd;
+                }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
     <style>
         #menuL > ul > li > a {
             color: #CCCECF;
@@ -70,6 +145,10 @@
                 background-color: #333333;
                 color: #CCCECF;
             }
+
+        .logout:hover {
+            background-color: red !important
+        }
     </style>
 
 
@@ -109,51 +188,170 @@
                         <div id="baskets" class="hidden1" hidden>
                             <div id="cd-cart-trigger" style="background-color: black;">
 
+
                             </div>
                             <div id="cd-cart" class="speed-in" style=" margin-top: 5.5%; border-radius: 50px; height: auto;">
-                                <h2 style="margin-top: -46px; ">Cart</h2>
-                                <ul class="cd-cart-items">
+                                <h2 style="margin-top: -46px; color: black; ">سبد خرید</h2>
+                                <ul class="cd-cart-items" style="  height: auto;overflow:auto;max-height:260px;">
 
-
-                                    @foreach (var i in products)
+                                    @foreach (Products.Product i in products)
                                     {
-                                        <li>
-                                            <span class="cd-qty">1x</span> @i.nameProduct
-                                            <div class="cd-price">@i.price</div>
-                                            <a href="#0" class="cd-item-remove cd-img-replace">Remove</a>
-                                        </li>
+
+                                        bool check = repProd.Any(k => k.id == i.Id);
+                                        if (check == true)
+                                        {
+                                            var q = from l in repProd where l.id == i.Id select l;
+                                            var cuntp = q.Single();
+                                            var multiplication = i.price * cuntp.count;
+                                            <li>
+                                                <img style=" height: auto; width: 60px; margin-right: 23px;" src="~/image/users/@i.pics" />
+                                                <span class="cd-qty">x @cuntp.count</span><div>@i.nameProduct</div>
+                                                <div class="cd-price" style=" margin-right: 80px; width: 50%;">$@multiplication.ToString("n0")</div>
+
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <input class="pid" value="@i.Id" hidden />
+
+                                                <img style=" height: auto; width: 60px; margin-right: 23px;" src="~/image/users/@i.pics" />
+                                                <span class="cd-qty">x1</span><div>@i.nameProduct</div>
+                                                <div class="cd-price" style=" margin-right: 80px; width: 50%;">$ @i.price.ToString("n0")</div>
+
+                                            </li>
+                                        }
+
                                     }
 
                                 </ul> <!-- cd-cart-items -->
 
-                                <div class="cd-cart-total">
-                                    <p>Total <span>$</span></p>
+                                <div class="cd-cart-total" style=" color: black; ">
+                                    <p>جمع کل <span>$@TotalPrice.ToString("n0")</span></p>
                                 </div> <!-- cd-cart-total -->
+                                @if (User.Identity.IsAuthenticated)
+                                {
 
-                                <a href="#0" class="checkout-btn">فاکتور</a>
+                                    <a href="@Url.Action("ShowFactor","Account")" class="checkout-btn">فاکتور</a>
 
-                                <p class="cd-go-to-cart"><a href="#0">Go to cart page</a></p>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("login","Account")" style="display: block; width: 100%; height: 60px; line-height: 60px; background: #cccccc; color: #FFF; text-align: center; ">فاکتور</a>
+                                    <p class="cd-go-to-cart"><a style=" color: black !important; " href="@Url.Action("signUp","Account")">ثـبت نام نکردی؟</a></p>
+                                }
+
+
                             </div>
 
                         </div>
+
+
+                        <div id="baskets2" class="hidden1" hidden>
+                            <div id="cd-cart-trigger" style="background-color: black;">
+
+
+                            </div>
+                            <div id="cd-cart" class="speed-in" style=" width: 332px; background: #ccccc; margin-top: 5.5%; border-radius: 50px; height: 151px;">
+
+                                <div class="cd-cart-items">
+
+                                    <h3>
+                                        کالایی در سبد شما وجود ندارد
+                                    </h3>
+
+
+                                </div> <!-- cd-cart-items -->
+
+                            </div>
+
+                        </div>
+
+
                         <ul class="navbar-nav d-flex flex-row" style="margin-right: 45px;width:77px;flex-wrap: nowrap;margin-top:2px">
 
                             <li class="nav-item p-1" style="width: 11px; margin-top: 8%;">
                                 @if (User.Identity.IsAuthenticated)
                                 {
                                     var user = await usermanager.FindByNameAsync(User.Identity.Name);
+                                    var dbuser = blu.SearchUserName(user.UserName);
 
-                                    <a class="nav-link dropdown-toggle " data-toggle="dropdown" style="padding: 10px;"><span class="caret"></span>پروفایل</a>
+
+
+
+
                                     <div class="dropdown">
-                                        <div class="dropdown-menu" style=" margin:1.125rem -261px 0px !important;">
-                                            <div class="" style="width: 18rem;">
-                                                <img class="card-img-top" src="~/image/users/asd.jpg" alt="prof" style="height:auto">
-                                                <div class="card-body">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item">@user.Firstname @user.Lastname</li>
-                                                        <li class="list-group-item">تنظیمات</li>
-                                                        <li class="list-group-item"><a href="@Url.Action("Logout","Account")">خروج</a></li>
-                                                    </ul>
+                                        <a class="nav-link dropdown-toggle " style="padding: 10px;"><span class="caret"></span>پروفایل</a>
+
+
+                                        <div class="dropdown-content">
+
+                                            <div class="col-md-3" style=" max-width: 300px!important;">
+
+                                                <!-- Profile Image -->
+                                                <div class="card card-primary card-outline" style=" width: 290px; position: absolute; margin-right: -80px; margin-top: auto;">
+                                                    <div class="card-body box-profile">
+                                                        <div class="text-center">
+                                                            <img class="profile-user-img img-fluid img-circle" src="~/image/users/@dbuser.pic" alt="User profile picture">
+                                                        </div>
+
+                                                        <h3 class="profile-username text-center" style="color:black!important">@user.Firstname @user.Lastname</h3>
+                                                        <ul style="text-align: center;" class="list-group list-group-unbordered mb-3">
+                                                            @if (dbuser.admin == 0)
+                                                            {
+
+                                                                <a href="@Url.Action("Index","Admin")" class="text-muted text-center">پنل ادمین</a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <li class="list-group-item">
+                                                                    <a href="@Url.Action("ShowProfile","Account",new {username=User.Identity.Name})">پروفایل</a>
+                                                                </li>
+                                                            }
+
+                                                            <li class="list-group-item">
+                                                                <a href="@Url.Action("ShowFactor","Account")">سـبد خرید</a>
+                                                            </li>
+
+                                                        </ul>
+                                                        @if (dbuser.admin != 0)
+                                                        {
+                                                            <a href="@Url.Action("Logout","Account")" class="btn btn-danger btn-block logout"><b>خروج از حساب</b></a>
+
+                                                        }
+                                                        else if (dbuser.admin == 0)
+                                                        {
+                                                            <a href="@Url.Action("LogoutAdmin","Account",new {h=dbuser.username })" class="btn btn-danger btn-block logout"><b>خروج از حساب</b></a>
+
+                                                        }
+
+                                                    </div>
+                                                    <!-- /.card-body -->
+                                                </div>
+                                                <!-- /.card -->
+                                                <!-- About Me Box -->
+                                                <!-- /.card -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <div class="dropdown">
+                                        <div class="dropdown-menu" id="Hprof" style="margin: 0.6rem -323px -2px !important; background: none; border: none; ">
+                                            <div class="card">
+                                                <div class="card-body p-4">
+
                                                 </div>
                                             </div>
                                         </div>
@@ -165,7 +363,7 @@
                                     <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal" href="#"
                                        style="padding: 10px;"><span class="caret"></span>ورود</a>
 
-                                    <div class="container">
+                                    <div class="container" style="background-color: #1d1e31 ">
 
                                         <!-- Button to Open the Modal -->
                                         <!-- The Modal -->
@@ -175,7 +373,7 @@
 
                                                     <!-- Modal Header -->
                                                     <div class="modal-header">
-                                                        <h2 class="modal-title" style=" margin-right: 45%;">ورود</h2>
+                                                        <h2 class="modal-title" style="color: black; margin-right: 4.6em;">ورود</h2>
 
                                                     </div>
 
@@ -184,32 +382,23 @@
                                                         <form asp-action="login" asp-controller="Account" method="post" class="was-validated" dir="rtl">
                                                             <div class="form-group">
 
-                                                                <input type="text" class="form-control" id="uname" placeholder="نام کاربری"
+                                                                <input maxlength="25" type="text" class="form-control" id="uname" placeholder="نام کاربری"
                                                                        asp-for="Username" required>
                                                                 <div class="valid-feedback"> </div>
                                                                 <div class="invalid-feedback"></div>
                                                             </div>
                                                             <div class="form-group">
 
-                                                                <input type="password" class="form-control" id="pwd" placeholder="رمز عبور"
+                                                                <input maxlength="25" type="password" class="form-control" id="pwd" placeholder="رمز عبور"
                                                                        asp-for="Password" required>
                                                                 <div class="valid-feedback"></div>
                                                                 <div class="invalid-feedback"></div>
                                                             </div>
                                                             <div class="form-group form-check">
-                                                                <label class="form-check-label">
-                                                                    <input class="form-check-input" type="checkbox" name="remember"> من را به خاطر
-                                                                    داشته باش
-
-                                                                    <div class="valid-feedback"></div>
-
-                                                                    <div class="invalid-feedback"></div>
-
-                                                                </label>
-                                                                <div><a href="@Url.Action("signUp","Account")">ثـبت نام نکردی؟</a></div>
+                                                                <div><a style="color:black!important" href="@Url.Action("signUp","Account")">ثـبت نام نکردی؟</a></div>
                                                             </div>
                                                             <button type="submit" class="btn btn-primary"
-                                                                    style="width: 230px; margin-right: 17%;">
+                                                                    style=" width: 15em;">
                                                                 ورود
                                                             </button>
                                                         </form>
@@ -234,11 +423,23 @@
                                 }
 
                             </li>
-                            <li class="nav-item p-1" id="basket" style="margin-right: 80px; margin-top: 9%; ">
-                                <a class="nav-link" href="#" style="margin-top: -17px; padding: 10px;">
-                                    <i style="font-size:24px;color:#CCCECF;margin-top: 15px;" class="fa">&#xf291;</i><span class="badge badge-danger" style="display: inline-table;position: absolute;margin-right: -48px;margin-top: 16px;">@products.Count</span>
-                                </a>
-                            </li>
+                            @if (httpContextAccessr.HttpContext.Session.GetString("basket") != null)
+                            {
+                                <li class="nav-item p-1" id="basket" style="margin-right: 80px; margin-top: 9%; ">
+                                    <a class="nav-link" href="#" style="margin-top: -17px; padding: 10px;">
+                                        <i style="font-size: 24px; color: #ff2800; margin-top: 15px;" class="fa">&#xf291;</i><span class="badge badge-danger" id="countpord" style="display: inline-table;position: absolute;margin-right: -48px;margin-top: 16px;">@products.Count</span>
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item p-1" id="basket2" style="margin-right: 80px; margin-top: 9%; ">
+                                    <a class="nav-link" href="#" style="margin-top: -17px; padding: 10px;">
+                                        <i style="font-size:24px;color:#CCCECF;margin-top: 15px;" class="fa">&#xf291;</i>
+                                    </a>
+                                </li>
+                            }
+
 
 
 
@@ -247,7 +448,7 @@
                         </ul>
                         <nav style=" position: absolute; margin-right: 15%">
                             <div class="main-menu" style=" margin-right: 18%; background-color: #343a40 !important; box-shadow: none !important; ">
-                                <div class="container" style="">
+                                <div class="container" style="background-color: #1d1e31 ">
                                     <div class="row">
 
                                         <div class="col-md-12" id="menuL">
@@ -265,20 +466,20 @@
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="سایر"})">سایر</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="آرایشی و بهداشتی"})">آرایشی و بهداشتی</a></li>
+                                                <li class="menuli"><a href="@Url.Action("ReadByTCategory","Products",new {h ="آرایشی و بهداشتی"})">آرایشی و بهداشتی</a></li>
                                                 <li>
-                                                    <a href="@Url.Action("ReadByCategory","Products",new {h ="مد و پوشاک"})">مد و پوشاک</a>
+                                                    <a href="@Url.Action("ReadByTCategory","Products",new {h ="مد و پوشاک"})">مد و پوشاک</a>
                                                     <ul class="menuli" style="margin-right:-17%">
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="لباس فصل"})">لباس فصل</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="ساعت  مچی"})">ساعت  مچی</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="بدلیجات"})">بدلیجات</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="خانه و آشپزخانه"})">خانه و آشپزخانه</a></li>
-                                                <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="ابزار اداری"})">ابزار اداری</a></li>
-                                                <li class="menuli"><a href="@Url.Action("ReadByCategory","Products",new {h ="اسباب بازی"})">اسباب بازی</a></li>
+                                                <li class="menuli"><a href="@Url.Action("ReadByTCategory","Products",new {h ="خانه و آشپزخانه"})">خانه و آشپزخانه</a></li>
+                                                <li class="menuli"><a href="@Url.Action("ReadByTCategory","Products",new {h ="ابزار اداری"})">ابزار اداری</a></li>
+                                                <li class="menuli"><a href="@Url.Action("ReadByTCategory","Products",new {h ="اسباب بازی"})">اسباب بازی</a></li>
                                                 <li>
-                                                    <a href="@Url.Action("ReadByCategory","Products",new {h ="اخبار"})">اخبار</a>
+                                                    <a href="@Url.Action("ReadByTCategory","Products",new {h ="اخبار"})">اخبار</a>
                                                     <ul class="menuli" style="margin-right:-19%">
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="تکنولوژی"})">تکنولوژی</a></li>
                                                         <li><a href="@Url.Action("ReadByCategory","Products",new {h ="علم و دانش"})">علم و دانش</a></li>
@@ -310,8 +511,243 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
+        <div class="tab-box">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="@Url.Action("ReadByCategory","Products",new {h ="ساعت  مچی"})"><i class="fa fa-gift"></i>ساعت مچی</a></li>
+                <li><a href="@Url.Action("ReadByCategory","Products",new {h ="بدلیجات"})"><i class="fa fa-gift"></i>بدلیجات</a></li>
+                <li><a href="@Url.Action("ReadByTCategory","Products",new {h ="آرایشی و بهداشتی"})"><i class="fa fa-gift"></i>آرایشی و بهداشتی</a></li>
+                <li><a href="@Url.Action("ReadByTCategory","Products",new {h ="اسباب بازی"})"><i class="fa fa-gift"></i>اسباب بازی</a></li>
+                <li><a href="@Url.Action("ReadByTCategory","Products",new {h ="کالای دیجیتال"})"><i class="fa fa-gift"></i>کالای دیجیتال</a></li>
+                <li><a href="@Url.Action("ReadByCategory","Products",new {h ="لباس فصل"})"><i class="fa fa-gift"></i>لباس فصل</a></li>
+            </ul>
+            <div class="container">
+                <div class="row">
+                    <div class="tab-content">
+                        <div id="watch" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/watch/1.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                        <div id="badaligat" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/badal/1.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                        <div id="behdashti" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/behdashti/1.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                        <div id="bazi" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/bazi/1.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                        <div id="varzesh" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/varzesh/8.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                        <div id="lebas" class="tab-pane fade">
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                            <div class="col-md-3">
+                                <a href="#"><img src="img/off/lebas/1.jpg" class="w-100"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="footer-description">
+                            <ul>
+                                <li>تضمین اصالت کالاهای فروخته شده</li>
+                                <li>فروش برند های معتبر</li>
+                                <li>پاسخگویی 24 ساعته</li>
+                                <li>امکان پرداخت آنلاین با کارت بانکی و پرداخت در محل</li>
+                                <li>امکان بازگشت تا یک هفته در صورت عدم رضایت مشتری</li>
+                                <li>خرید آسان و مطمئن</li>
+                                <li>قیمت های مناسب</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="footer-description2">
+                            <ul>
+                                <li><i class="fa fa-truck"></i>تحویل پستی سریع</li>
+                                <li><i class="fa fa-plane"></i>ارسال با پست پیشتاز و سفارشی</li>
+                                <li><i class="fa fa-cart-arrow-down"></i>خرید آسان و راحت</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="news-form">
+                            <h5>در خبرنامه عضو شوید</h5>
+                            <form action="">
+                                <input type="email" placeholder="ایمیل خود را وارد کنید">
+                                <button type="submit"><i class="fa fa-envelope-o"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        ©&nbsp;&nbsp;طراحی و کدنویسی &nbsp;&nbsp;&nbsp;&nbsp;
+                        <span>keyvan.arjmnd@gamil.com</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/bsket/modernizr.js"></script>
@@ -333,6 +769,9 @@
         }
     </script>
     <script>
+
+
+
         $(document).ready(function () {
 
             $("#basket").click(function () {
@@ -359,6 +798,29 @@
             });
 
 
+            $("#basket2").click(function () {
+
+
+                var element = document.getElementById("baskets2");
+                var status = element.getAttribute("class");
+
+
+                if (status == "hidden1") {
+
+                    $("#baskets2").prop('hidden', false);
+                    $("#baskets2").removeClass("hidden1");
+
+
+                } else if (status == "") {
+
+                    $("#baskets2").prop('hidden', true);
+                    $("#baskets2").addClass("hidden1");
+
+                }
+
+
+            });
+
 
             $("#cd-cart").hover(function () {
 
@@ -370,13 +832,17 @@
             });
 
             $("#basket").hover(function () {
-                if ($("#Cprof").attr('hidden', true)) {
-                    $("#baskets").prop('hidden', false);
-                }
+
+                $("#Hprof").prop('hidden', true);
+
+                $("#baskets").prop('hidden', false);
+
             }, function () {
                 $("#baskets").prop('hidden', true);
-
+                $("#Hprof").prop('hidden', false);
             });
+
+
 
         });
     </script>
@@ -384,20 +850,31 @@
 
         $(document).ready(function () {
 
-            $("#prof").click(function () {
 
-                $("#baskets").prop('hidden', true);
+            $(".RmB").click(function () {
 
-                if ($("#Cprof").attr('hidden', true)) {
 
-                    $("#Cprof").attr('hidden', false);
+                var currentrow = $(this).closest("form");
 
-                } else if ($("#Cprof").attr('hidden', false)) {
+                var id =  currentrow.find($("input.id[type=text]")).val();
 
-                    $("#Cprof").attr('hidden', true);
-                }
 
+
+                $.ajax({
+                    url: "@Url.Action("RemoveInBasket", "Order")",
+                    type: "post",
+                    dataType: "json",
+                    data: { prodid: id },
+                    processData: false,
+                    contentType: "application/json; charset=UTF-8",
+
+                    success: function (data) {
+                        alert("hale");
+                    },
+
+                });
             });
+
 
         });
     </script>

@@ -12,37 +12,37 @@
             <form asp-action="signUp" asp-controller="Account" method="post" enctype="multipart/form-data" class="was-validated " dir="rtl" style=" margin-right: 40%; margin-top: 6%;">
                 <div class="form-group">
 
-                    <input type="text" class="form-control" id="pwd" placeholder="نام" asp-for="FirstName" required>
+                    <input type="text" class="form-control" id="pwd" placeholder="نام" asp-for="FirstName" required maxlength="30">
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
 
-                    <input type="text" class="form-control" id="pwd" placeholder="فامیل" asp-for="LastName" required>
+                    <input type="text" class="form-control" id="pwd" placeholder="فامیل" asp-for="LastName" required maxlength="30">
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
 
-                    <input type="email" class="form-control" id="pwd" placeholder="ایمیل" asp-for="Email" required>
+                    <input type="email" class="form-control" id="pwd" placeholder="ایمیل" asp-for="Email" required maxlength="30">
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
 
-                    <input type="text" class="form-control" id="uname" placeholder="نام کاربری" asp-for="Username" required>
+                    <input type="text" class="form-control" id="uname" placeholder="نام کاربری" asp-for="Username" required maxlength="30">
                     <div class="valid-feedback"> </div>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
 
-                    <input type="password" class="form-control" id="pwd" placeholder="رمز عبور" asp-for="Password" required>
+                    <input type="password" class="form-control" id="pwd" placeholder="رمز عبور" asp-for="Password" required maxlength="30">
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback"></div>
                 </div>
                 <div class="form-group">
 
-                    <input type="password" class="form-control" id="pwd" placeholder="تکرار رمز عبور" asp-for="PasswordTwo" required>
+                    <input type="password" class="form-control" id="pwd" placeholder="تکرار رمز عبور" asp-for="PasswordTwo" required maxlength="30">
                     <div class="valid-feedback"></div>
                     <div class="invalid-feedback"></div>
                 </div>

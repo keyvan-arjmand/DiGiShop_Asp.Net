@@ -100,7 +100,7 @@ namespace DiGi.Controllers
                 Upload up = new Upload(Environment);
                 var newProd = new Products.Product
                 {
-                    Id=h.id,
+                    Id = h.id,
                     nameProduct = h.nameProduct,
                     price = h.price,
                     description = h.description,
@@ -123,14 +123,30 @@ namespace DiGi.Controllers
                 bl.EditProducts(newProd);
 
                 return RedirectToAction("productsPanel", "Admin");
-                  
-            }else return RedirectToAction("productsPanel", "Admin");
+
+            }
+            else return RedirectToAction("productsPanel", "Admin");
         }
         public IActionResult ReadByCategory(string h)
         {
-            ViewBag.Products = bl.ReadByCategory(h);
+            ViewBag.category = h;
+
 
             return View();
+        }
+        public IActionResult ProductDetails(int prodid)
+        {
+            var prod = bl.ReadById(prodid);
+            ViewBag.Prod = prod;
+
+            return View();
+        }
+        public IActionResult ReadByTCategory(string h)
+        {
+            ViewBag.Tcategory = h;
+
+
+            return View("ReadByTcat");
         }
 
     }

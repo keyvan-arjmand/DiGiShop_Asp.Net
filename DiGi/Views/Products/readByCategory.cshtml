@@ -1,98 +1,71 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    var h = ViewBag.category;
 }
 @using Be;
+@model ProductsModel
 
 
-<div class="container">
-    <div class="row">
-        <nav class="col-md-2">
-            <div id="mySidenav" class="sidenav" style=" border-radius: 40px;">
-                <div style=" margin-right: 4%;">
 
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="#">Clients</a>
-                    <a href="#">Contact</a>
+
+
+
+@section link {
+
+
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Font Awesome -->
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <style>
+        .Aprod:hover > a {
+            background-color: #f79fff;
+            color: black
+        }
+    </style>
+
+
+
+
+}
+
+
+
+<div class="content-wrapper">
+
+    <section class="content">
+
+
+
+        <div class="col-sm-6">
+            <form class="form-inline ml-3" asp-action="Search" asp-controller="Products" method="post">
+                <div class="input-group input-group-sm">
+                    <input maxlength="25" class="form-control form-control-navbar" name="h" type="search" placeholder="جستجو" aria-label="Search">
+                    <div class="input-group-append" style=" background-color: darkgrey;">
+                        <button class="btn btn-navbar" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
                 </div>
-
-            </div>
-        </nav>
-        <div class="col-md-10" style=" border-bottom: solid; display: flex; flex-wrap: wrap; justify-content: space-evenly; margin-top: 1%; border-top: solid; padding-top: 26px; border-radius: 40px; padding-bottom: 40px;">
-            @foreach (Products.Product i in ViewBag.Products)
-            {
-
-                <div class="card" style=" height: auto; width: 27%;">
+            </form>
+        </div><!-- /.col -->
+        <!-- /.card-header -->
+        <div class="card" style=" width: 128%; ">
 
 
-                    <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
-                    <h3>
-                        @i.nameProduct
-                    </h3>
-                    <h5 class="price">@i.price</h5>
-                    <p>@i.specialFeatures</p>
-                    <p><a asp-action="AddToBasket" asp-controller="Order" asp-route-prodid="@i.Id" style="  border-radius: 10px;">افزودن به سبد خرید</a></p>
-                </div>
 
+            @await Component.InvokeAsync("Products", h);
 
-            }
+            <!-- /.card-body -->
         </div>
-
-    </div>
-
+    </section>
 </div>
 
 
-@section Scripts{
-  
-    <style>
 
-
-
-        .sidenav {
-            height: 100%;
-            width: 250px;
-            position: fixed;
-            z-index: 1;
-            top: 10px;
-            left: auto;
-            background-color: #343a40;
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-            margin-right: -6.1%;
-            margin-top: 5.5%;
-        }
-
-            .sidenav a {
-                padding: 8px 8px 8px 32px;
-                text-decoration: none;
-                font-size: 25px;
-                color: #818181;
-                display: block;
-                transition: 0.3s;
-            }
-
-                .sidenav a:hover {
-                    color: #f1f1f1;
-                }
-
-            .sidenav .closebtn {
-                position: absolute;
-                top: 0;
-                right: 210px;
-                font-size: 36px;
-                margin-left: 50px;
-            }
-    </style>
-
-    <script>
-
-        $(document).ready(function () {
-
-        });
-
-
-    </script>
-}
 

@@ -220,6 +220,7 @@ namespace Dal.Migrations
                         principalTable: "factors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                   
                 });
 
             migrationBuilder.CreateIndex(

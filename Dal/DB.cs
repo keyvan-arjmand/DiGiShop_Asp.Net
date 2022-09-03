@@ -31,6 +31,7 @@ namespace Dal
         public DbSet<Beusers> users { set; get; }
         public DbSet<Products.Product> products { set; get; }
         public DbSet<Products.Factor> factors { set; get; }
+        public DbSet<Products.prodFactor> fctorprod { set; get; }
        
 
 

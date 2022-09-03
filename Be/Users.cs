@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
+using static Be.Products;
 
 namespace Be
 {
@@ -16,6 +18,7 @@ namespace Be
             public string phoneNumber { get; set; }
             public string pic { get; set; }
             public int admin { get; set; }
+            public List<Factor> factors { set; get; }
         }
         public class UserApp : IdentityUser
 

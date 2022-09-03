@@ -1,0 +1,142 @@
+﻿@using Be
+@model ProductsModel
+
+<style>
+    .Aprod:hover > a {
+        background-color: #f79fff;
+        color: black
+    }
+</style>
+
+
+<div class="card-body" id="crd" style=" display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+
+
+    @{
+        BlL.usersBll blu = new BlL.usersBll();
+        BlL.productsBll bl = new BlL.productsBll();
+
+        var prod = new List<Products.Product>();
+        if (Model.Catgory == null)
+        {
+
+            prod = bl.Read();
+
+        }
+        else
+        {
+            prod = bl.ReadByCategory(Model.Catgory);
+
+        }
+
+        if (prod.Count() > 0)
+        {
+            foreach (Products.Product i in prod)
+            {
+
+
+                <div class="card" style=" height: auto; width: 27%;">
+
+                    <form>
+                        <input type="text" name="id" class="mid" value="@i.Id" hidden>
+                        <input type="text" name="nameProduct" class="mnameProduct" value="@i.nameProduct" hidden>
+                        <input type="text" name="price" class="mprice" value="@i.price" hidden>
+                        <input type="text" name="description" class="mdescription" value="@i.description" hidden>
+                        <input type="text" name="camra" class="mcamra" value="@i.camra" hidden>
+                        <input type="text" name="dimensions" class="mdimensions" value="@i.dimensions" hidden>
+                        <input type="text" name="weight" class="mweight" value="@i.weight" hidden>
+                        <input type="text" name="screen" class="mscreen" value="@i.screen" hidden>
+                        <input type="text" name="screenSize" class="mscreenSize" value="@i.screenSize" hidden>
+                        <input type="text" name="bodyStructure" class="mbodyStructure" value="@i.bodyStructure" hidden>
+                        <input type="text" name="specialFeatures" class="mspecialFeatures" value="@i.specialFeatures" hidden>
+                        <input type="text" name="introductionTime" class="mintroductionTime" value="@i.introductionTime" hidden>
+                        <input type="text" name="productModel" class="mproductModel" value="@i.productModel" hidden>
+                        <input type="text" name="memoryCard" class="mmemoryCard" value="@i.memoryCard" hidden>
+                        <input type="text" name="numberProducts" class="mnumberProducts" value="@i.numberProducts" hidden>
+                        <input type="text" name="batterySpecifications" class="mbatterySpecifications" value="@i.batterySpecifications" hidden>
+                        <input type="text" name="operatingSystem" class="moperatingSystem" value="@i.operatingSystem" hidden>
+                        <input type="text" name="category" class="mcategory" value="@i.category" hidden>
+                        <input type="text" name="titlecategory" class="mtitlecategory" value="@i.titleCategory" hidden>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            var user = blu.SearchUserName(User.Identity.Name);
+
+                            @if (user.admin == 0)
+                            {
+
+                                <a class="btnmoadl" style="margin-right: 89%; cursor: pointer" data-toggle="modal" data-target="#myModal" id="searchsub"><i class="material-icons">&#xe241;</i></a>
+                            }
+
+                        }
+                      
+                        @if (i.numberProducts > 0)
+                        {
+
+                            <p style=" position: absolute; margin-left: 12em; margin-top: -1.2em;">@i.numberProducts<img style="width:27px;height:auto" src=" https://cdn-icons-png.flaticon.com/512/4862/4862425.png" /></p>
+                        }
+                        else
+                        {
+                            <img style=" width: 30px; height: auto; margin-top: -1.2em; margin-left: 14em;" src="  https://cdn-icons-png.flaticon.com/512/2293/2293614.png" />
+                        }
+
+                    </form>
+
+
+                    <img src="~/image/users/@i.pics" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
+                    <h3>
+                        @i.nameProduct
+                    </h3>
+                    <h5 class="price">@i.price.ToString("n0")</h5>
+                    <p>@i.specialFeatures</p>
+                    @if (i.numberProducts > 0)
+                    {
+
+                        <p class="Aprod"><a asp-action="AddToBasket" asp-controller="Order" asp-route-prodid="@i.Id" style=" background-color: black; border-radius: 10px; background-color: #a612b5; border-radius: 10px; padding: 15px; color: white;">موجود در انبار</a></p>
+                    }
+                    else
+                    {
+                        <p class="Aprod disabled"><a class="disabled" style=" border-radius: 10px; background-color: darkgrey; border-radius: 10px; padding: 15px; color: white;">ناموجود در انبار</a></p>
+
+                    }
+                </div>
+            }
+        }
+        else
+        {
+
+            <div class="card" style=" height: auto; width: 27%; margin-left: -35%; ">
+
+                <img src="https://cdn-icons-png.flaticon.com/512/5964/5964160.png" alt="Denim Jeans" style=" width: 56%; margin-right: 22%;">
+                <h3 style=" margin-right: 35%; ">
+                    یافت نشد
+                </h3>
+                <h5 class="price" style=" margin-right: 43%; ">0000</h5>
+                <p></p>
+                <p class="Aprod" style="margin-right:25%"><a href="@Url.Action("Inex","Home")">محصول مورد نظر یافت نشد</a></p>
+            </div>
+
+        }
+
+    }
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

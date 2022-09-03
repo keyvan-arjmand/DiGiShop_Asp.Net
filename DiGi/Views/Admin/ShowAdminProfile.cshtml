@@ -1,0 +1,169 @@
+﻿
+@using Be
+@{
+    Layout = "~/Views/Shared/_layoutAdminPanel.cshtml";
+
+    Users.Beusers user = ViewBag.user;
+}
+@model UserModel
+
+<div class="content-wrapper" style="min-height: 520.333px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>پروفایل</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-left">
+                        <li class="breadcrumb-item"><a href="#">خانه</a></li>
+                        <li class="breadcrumb-item active">پروفایل ادمین</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <!-- Profile Image -->
+                    <div class="card card-primary card-outline">
+                        <div class="card-body box-profile">
+                            <div class="text-center">
+                                <img class="profile-user-img img-fluid img-circle" src="~/image/users/@user.pic" alt="User profile picture">
+                            </div>
+
+                            <h3 class="profile-username text-center">@user.name @user.family</h3>
+
+                            <p class="text-muted text-center">ادمین سایت</p>
+
+                            <a href="#" class="btn btn-primary btn-block"><b>خروج از حساب</b></a>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                    <!-- About Me Box -->
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">میزان فعالیت</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <strong><i class="fa fa-book mr-1"></i>ثـبت سفارش در این ماه</strong>
+
+                            <p class="text-muted">
+                                39 عدد
+                            </p>
+
+                            <hr>
+
+                            <strong><i class="fa fa-map-marker mr-1"></i> وضعیت حساب</strong>
+
+                            <p class="text-muted">ادمین اصلی</p>
+
+                            <hr>
+
+                             </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-9">
+                    <div class="card">
+                        <div class="card-header p-2">
+                            <ul class="nav nav-pills">
+                               
+                                <li class="nav-item"><a class="nav-link active show" href="#settings" data-toggle="tab">تنظیمات</a></li>
+                            </ul>
+                        </div><!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="tab-content">
+                            
+                                <div class="tab-pane active show" id="settings">
+                                    <form asp-action="EditAdmin" asp-controller="Account" method="post">
+
+                                        <input value="@user.Id" name="id" type="text" hidden />
+                                        <div class="input-group mb-3">
+                                            <input id="name" value="@user.name" name="FirstName" type="text" class="form-control" placeholder="نام">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-user input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="family" value="@user.family" name="LastName" type="text" class="form-control" placeholder="نام خانوادگی">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-user input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="email" value="@user.email" name="email" type="email" class="form-control" placeholder="ایمیل">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-envelope input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="username" value="@user.username" name="username" type="text" class="form-control" placeholder="نام کاربری">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-user input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="password" value="@user.password" name="password" type="text" class="form-control" placeholder="رمز عبور">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-lock input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="phonenumber" value="@user.phoneNumber" name="phoneNumber" type="text" class="form-control" placeholder="شماره تماس">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-user input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <input id="Admin" maxlength="2" value="@user.admin" name="admin" type="text" class="form-control" placeholder="وضعیت ادمین 1 / 0 ">
+                                            <div class="input-group-append">
+                                                <span class="fa fa-user input-group-text"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">پروفایل کاربر</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" name="pic" class="custom-file-input" id="exampleInputFile">
+                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                </div>
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="">Upload</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <!-- /.col -->
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary btn-block btn-flat">ثـبت تغیرات</button>
+                                            </div>
+                                            <!-- /.col -->
+                                        </div>
+                                    </form>
+                                </div>
+                                <!-- /.tab-pane -->
+                            </div>
+                            <!-- /.tab-content -->
+                        </div><!-- /.card-body -->
+                    </div>
+                    <!-- /.nav-tabs-custom -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+</div>

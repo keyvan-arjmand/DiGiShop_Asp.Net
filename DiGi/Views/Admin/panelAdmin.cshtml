@@ -15,7 +15,7 @@
     <div class="col-12">
         <!-- Custom Tabs -->
         <div class="card">
-        
+
             <div class="card-body">
                 <div class="tab-content">
                     <div class="tab-pane" id="tab_1">
@@ -27,16 +27,16 @@
                                 <div class="container-fluid">
                                     <div class="row mb-2">
                                         <div class="col-sm-6">
-                                           
-                                                <div class="card-header d-flex p-0">
-                                               
-                                                    <ul class="nav nav-pills ml-auto p-2">
-                                                        <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">ثـبت کاربران</a></li>
-                                                        <li class="nav-item"><a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست کاربران</a></li>
-                                                 
-                                                    </ul>
-                                                </div>
-                                            
+
+                                            <div class="card-header d-flex p-0">
+
+                                                <ul class="nav nav-pills ml-auto p-2">
+                                                    <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">ثـبت کاربران</a></li>
+                                                    <li class="nav-item"><a class="nav-link active show" href="#tab_2" data-toggle="tab">لیست کاربران</a></li>
+
+                                                </ul>
+                                            </div>
+
                                         </div><!-- /.col -->
                                         <div class="col-sm-6">
                                             <ol class="breadcrumb float-sm-left">
@@ -54,75 +54,77 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="card card-primary card-outline">
-                                               
-                                                <form role="form" asp-action="signUp" asp-controller="Account" method="post" enctype="multipart/form-data">
-                                                    <h6 class="card-title mb-2 text-bold" style=" padding-bottom: 20px; ">ثـبت نام کاربر</h6>
 
+
+                                                <form role="form" asp-action="signUp" asp-controller="Account" method="post" enctype="multipart/form-data">
+
+                                                    <h6 class="card-title mb-2 text-bold" style=" padding-bottom: 20px; ">ثـبت نام کاربر</h6>
                                                     <div class="card-body" style="display: flex; flex-wrap: wrap; justify-content: space-evenly; align-items: center;">
 
 
-
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">نام</label>
-                                                            <input asp-for="FirstName" type="text" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="نام را وارد کنید">
-                                                        </div>
-
-                                                        <div class="form-group" style="">
-                                                            <label for="exampleInputEmail1">فامیل</label>
-                                                            <input asp-for="LastName" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="فامیل را وارد کنید">
-                                                        </div>
-
-                                                        <div class="form-group">
-                                                            <label for="exampleInputEmail1">نام کاربری</label>
-                                                            <input asp-for="Username" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="نام کاربری را وارد کنید">
-                                                        </div>
-
-                                                        <div class="form-group" style=" ">
-                                                            <label for="exampleInputEmail1">شماره موبایل</label>
-                                                            <input asp-for="phoneNumber" type="text" class="form-control" style="width: 300px" id="exampleInputEmail1" placeholder="شماره موبایل را وارد کنید">
-                                                        </div>
-
-                                                        <div class="input-group " style="width: 300px;margin-top:1%">
-
-                                                            <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-
+                                                        <input asp-for="id" type="text" id="id" hidden />
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input  asp-for="FirstName" type="text" class="form-control" placeholder="نام">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-user input-group-text"></span>
                                                             </div>
-                                                            <input asp-for="Email" type="email" class="form-control" placeholder="ایمیل را وارد کنید">
                                                         </div>
-
-
-                                                        <div class="form-group" style=" margin-top: 2.5%;">
-
-                                                            <input asp-for="Password" type="password" class="form-control" style="width: 300px" id="exampleInputPassword1" placeholder="پسورد را وارد کنید">
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input  asp-for="LastName" type="text" class="form-control" placeholder="نام خانوادگی">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-user input-group-text"></span>
+                                                            </div>
                                                         </div>
-                                                        <div class="form-group" style=" width: 300px;">
-                                                            <label for="exampleInputFile">پروفایل</label>
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input   asp-for="Email" type="email" class="form-control" placeholder="ایمیل">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-envelope input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input id="username" asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-user input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input   asp-for="Password" type="password" class="form-control" placeholder="رمز عبور">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-lock input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input   asp-for="phoneNumber" type="text" class="form-control" placeholder="شماره تماس">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-user input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style=" width: 20em; " class="input-group mb-3">
+                                                            <input  maxlength="2" asp-for="admin" type="text" class="form-control" placeholder="وضعیت ادمین 1 / 0 ">
+                                                            <div class="input-group-append">
+                                                                <span class="fa fa-user input-group-text"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div style=" width: 20em; " class="form-group">
                                                             <div class="input-group">
                                                                 <div class="custom-file">
-                                                                    <input asp-for="pic" type="file" class="custom-file-input" id="exampleInputFile" style="width: 300px">
-                                                                    <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                    <input asp-for="pic" type="file" class="custom-file-input" id="exampleInputFile">
+                                                                    <label class="custom-file-label" for="exampleInputFile">پروفایل کاربر</label>
                                                                 </div>
                                                                 <div class="input-group-append">
                                                                     <span class="input-group-text" id="">Upload</span>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group" style="margin-left: -11%;">
-                                                            <label for="exampleInputEmail1">وضعیت ادمین</label>
-                                                            <input asp-for="admin" type="number" style="width: 300px" class="form-control" id="exampleInputEmail1" placeholder="1=کاربر عادی//0=ادمین//">
+                                                        <div class="row">
+
+                                                            <!-- /.col -->
+                                                            <div class="col-12">
+                                                                <button type="submit" class="btn btn-primary btn-block btn-flat">ثـبت تغیرات</button>
+                                                            </div>
+                                                            <!-- /.col -->
                                                         </div>
-
-                                                    </div>
-
-                                                    <!-- /.card-body -->
-                                                    <div class="form-check">
-                                                        <input type="checkbox" class="form-check-input" id="exampleCheck1" style="width: 300px">
-                                                        <label class="form-check-label" for="exampleCheck1">مرا بخاطر بسپار</label>
-                                                    </div>
-                                                    <div class="" style="margin-right: 35%;background-color:none !important; ">
-                                                        <button type="submit" class="btn btn-primary" style=" width: 239px;">ارسال</button>
-                                                    </div>
+                                                        </div>
                                                 </form>
                                             </div>
 
@@ -171,6 +173,7 @@
                                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">تلفن همراه</th>
                                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">وضعیت ادمین</th>
                                                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">پروفایل</th>
+                                                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="امتیاز: activate to sort column ascending" style="width: 51.4688px;">ویرایش</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -178,7 +181,7 @@
 
                                                                 int num = 0;
 
-                                                                foreach (var item in ViewBag.users)
+                                                                foreach (Be.Users.Beusers item in ViewBag.users)
                                                                 {
                                                                     num = num + 1; // is the first item considered even or odd?  that answer changes where this should go
 
@@ -193,8 +196,30 @@
                                                                             <td>@item.username</td>
                                                                             <td>@item.password</td>
                                                                             <td>@item.phoneNumber</td>
-                                                                            <td>@item.admin</td>
-                                                                            <td><img src="~/image/users/@item.pic" /></td>
+                                                                            @if (@item.admin == 0)
+                                                                            {
+
+                                                                                <td>ادمین</td>
+                                                                            }
+                                                                            else if (@item.admin == 1)
+                                                                            {
+                                                                                <td>کاربر</td>
+                                                                            }
+                                                                            <td><img style="width: 100px; height: auto;" src="~/image/users/@item.pic" /></td>
+                                                                            <td>
+                                                                                <form id="userform">
+                                                                                    <a class="auser" data-toggle="modal" data-target="#exampleModal"><img style="width: 60px; margin-right: 1em; height: auto;" src=" https://cdn-icons-png.flaticon.com/512/1001/1001371.png" /></a>
+                                                                                    <input type="text" class="id" value="@item.Id" hidden>
+                                                                                    <input type="text" class="name" value="@item.name" hidden>
+                                                                                    <input type="text" class="family" value="@item.family" hidden>
+                                                                                    <input type="text" class="email" value="@item.email" hidden>
+                                                                                    <input type="text" class="username" value="@item.username" hidden>
+                                                                                    <input type="text" class="password" value="@item.password" hidden>
+                                                                                    <input type="text" class="phoneNumber" value="@item.phoneNumber" hidden>
+                                                                                    <input type="text" class="admin" value="@item.admin" hidden>
+
+                                                                                </form>
+                                                                            </td>
 
                                                                         </tr>
                                                                     }
@@ -206,8 +231,32 @@
                                                                     <td>@item.username</td>
                                                                     <td>@item.password</td>
                                                                     <td>@item.phoneNumber</td>
-                                                                    <td>@item.admin</td>
-                                                                    <td><img src="~/image/users/@item.pic" /></td>
+                                                                    @if (item.admin == 0)
+                                                                    {
+
+                                                                        <td>ادمین</td>
+                                                                    }
+                                                                    else if (item.admin == 1)
+                                                                    {
+                                                                        <td>کاربر</td>
+                                                                    }
+                                                                    <td><img style="width: 100px; height: auto;" src="~/image/users/@item.pic" /></td>
+
+                                                                    <td>
+                                                                        <form id="userform">
+                                                                            <a class="auser" data-toggle="modal" data-target="#exampleModal"><img style="width: 60px; margin-right: 1em; height: auto;" src=" https://cdn-icons-png.flaticon.com/512/1001/1001371.png" /></a>
+                                                                            <input type="text" class="id" value="@item.Id" hidden>
+                                                                            <input type="text" class="name" value="@item.name" hidden>
+                                                                            <input type="text" class="family" value="@item.family" hidden>
+                                                                            <input type="text" class="email" value="@item.email" hidden>
+                                                                            <input type="text" class="username" value="@item.username" hidden>
+                                                                            <input type="text" class="password" value="@item.password" hidden>
+                                                                            <input type="text" class="phoneNumber" value="@item.phoneNumber" hidden>
+                                                                            <input type="text" class="admin" value="@item.admin" hidden>
+
+                                                                        </form>
+                                                                    </td>
+
                                                                 }
 
                                                             }
@@ -217,6 +266,91 @@
                                                             </tbody>
 
                                                         </table>
+                                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">ویرایش اطلاعات</h5>
+                                                                        <button style="margin-right: 12em;" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <form asp-action="EditUser" asp-controller="Account" method="post">
+
+                                                                            <input asp-for="id" type="text" id="id" hidden />
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="name" asp-for="FirstName" type="text" class="form-control" placeholder="نام">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-user input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="family" asp-for="LastName" type="text" class="form-control" placeholder="نام خانوادگی">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-user input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="email" asp-for="Email" type="email" class="form-control" placeholder="ایمیل">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-envelope input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="username" asp-for="Username" type="text" class="form-control" placeholder="نام کاربری">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-user input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="password" asp-for="Password" type="password" class="form-control" placeholder="رمز عبور">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-lock input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="phonenumber" asp-for="phoneNumber" type="text" class="form-control" placeholder="شماره تماس">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-user input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="input-group mb-3">
+                                                                                <input id="Admin" maxlength="2" asp-for="admin" type="text" class="form-control" placeholder="وضعیت ادمین 1 / 0 ">
+                                                                                <div class="input-group-append">
+                                                                                    <span class="fa fa-user input-group-text"></span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label for="exampleInputFile">پروفایل کاربر</label>
+                                                                                <div class="input-group">
+                                                                                    <div class="custom-file">
+                                                                                        <input asp-for="pic" type="file" class="custom-file-input" id="exampleInputFile">
+                                                                                        <label class="custom-file-label" for="exampleInputFile">انتخاب فایل</label>
+                                                                                    </div>
+                                                                                    <div class="input-group-append">
+                                                                                        <span class="input-group-text" id="">Upload</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="row">
+
+                                                                                <!-- /.col -->
+                                                                                <div class="col-12">
+                                                                                    <button type="submit" class="btn btn-primary btn-block btn-flat">ثـبت تغیرات</button>
+                                                                                </div>
+                                                                                <!-- /.col -->
+                                                                            </div>
+                                                                        </form>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button style="margin-left: 25em;" type="button" class="btn btn-secondary" data-dismiss="modal">بستن</button>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="example1_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="example1_previous"><a href="#" aria-controls="example1" data-dt-idx="0" tabindex="0" class="page-link">قبلی</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="example1" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="4" tabindex="0" class="page-link">4</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="5" tabindex="0" class="page-link">5</a></li><li class="paginate_button page-item "><a href="#" aria-controls="example1" data-dt-idx="6" tabindex="0" class="page-link">6</a></li><li class="paginate_button page-item next" id="example1_next"><a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0" class="page-link">بعدی</a></li></ul></div></div></div>
                                             </div>
@@ -243,24 +377,53 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                        <div class="tab-pane" id="tab_3">
+
+
+                        </div>
+                        <!-- /.tab-pane -->
                     </div>
-                    <!-- /.tab-pane -->
-                    <div class="tab-pane" id="tab_3">
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                    </div>
-                    <!-- /.tab-pane -->
-                </div>
-                <!-- /.tab-content -->
-            </div><!-- /.card-body -->
+                    <!-- /.tab-content -->
+                </div><!-- /.card-body -->
+            </div>
+            <!-- ./card -->
         </div>
-        <!-- ./card -->
+        <!-- /.col -->
     </div>
-    <!-- /.col -->
-</div>
 
 
 
+    @section script{
 
+
+        <script>
+
+            $(document).ready(function () {
+
+                $(".auser").click(function () {
+
+                    var currentrow = $(this).closest("form");
+
+                    $("#id").val(currentrow.find($("input.id[type=text]")).val());
+                    $("#name").val(currentrow.find($("input.name[type=text]")).val());
+                    $("#family").val(currentrow.find($("input.family[type=text]")).val());
+                    $("#email").val(currentrow.find($("input.email[type=text]")).val());
+                    $("#username").val(currentrow.find($("input.username[type=text]")).val());
+                    $("#password").val(currentrow.find($("input.password[type=text]")).val());
+                    $("#phonenumber").val(currentrow.find($("input.phoneNumber[type=text]")).val());
+                    $("#Admin").val(currentrow.find($("input.adminض[type=text]")).val());
+
+
+                });
+
+            });
+        </script>
+
+
+
+    }
 
 
 

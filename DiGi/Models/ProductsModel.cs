@@ -11,7 +11,7 @@ namespace DiGi.Models
 
         public int id { get; set; }
         public string nameProduct { get; set; }
-        public string price { get; set; }
+        public int price { get; set; }
         public IFormFile pics { get; set; }
         public string description { get; set; }//توضیحات محصول
         public string camra { get; set; }//دوربین
@@ -24,9 +24,10 @@ namespace DiGi.Models
         public string introductionTime { get; set; }//زمان عرضه محصول
         public string productModel { get; set; }//مدل محصول
         public string memoryCard { get; set; }//کارت حافظه
-        public string numberProducts { get; set; }//تعداد موجودی محصول
+        public int numberProducts { get; set; }//تعداد موجودی محصول
         public string batterySpecifications { get; set; }//توضیحات باطری
         public string operatingSystem { get; set; }//سیستم عامل
+        public string Catgory { get; set; }//سیستم عامل
 
 
 

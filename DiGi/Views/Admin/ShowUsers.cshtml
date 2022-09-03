@@ -1,0 +1,87 @@
+﻿
+@using BlL;
+@using Be;
+
+@model List<UserModel>
+
+@{
+
+
+    Layout = "~/Views/Shared/_layoutAdminPanel.cshtml";
+
+}
+
+
+
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <form asp-action="Searchuser" asp-controller="Admin" method="post">
+                    <div class="card-header">
+                        <h3 class="card-title">جدول کاربران</h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+
+                                <input maxlength="25" type="text" name="info" class="form-control float-right" placeholder="جستجو">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!-- /.card-header -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>ایـدی</th>
+                                <th>نام کاربری</th>
+                                <th>نام فامیل</th>
+                                <th>شماره تماس</th>
+                                <th>ایمیل</th>
+                                <th>وضعیت ادمین</th>
+                                <th>پروفایل</th>
+                            </tr>
+
+                            @foreach (var i in Model)
+                            {
+                                <tr>
+
+                                    <td>@i.id</td>
+                                    <td>@i.Username</td>
+                                    <td>@i.FirstName @i.LastName</td>
+                                    <td>@i.phoneNumber</td>
+                                    <td>@i.Email</td>
+                                    @if (i.admin == 0)
+                                    {
+
+
+                                        <td><span class="badge badge-success">ادمین</span></td>
+                                    }
+                                    else if (i.admin != 0)
+                                    {
+                                        <td><span class="badge badge-primary">کاربر</span></td>
+
+                                    }
+
+                                    <td><img style="width:100px;height:auto;border-radius:100px" src="~/image/users/@i.pic2" /></td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</div>
